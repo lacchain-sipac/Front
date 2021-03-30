@@ -1,0 +1,87 @@
+<div mat-dialog-title
+     class="p-2 row d-flex header justify-content-end">
+  <div class="col-8 d-flex justify-content-center">
+    <span class="text-white">{{ data.title }}</span>
+  </div>
+  <div class="col-2 d-flex justify-content-end align-items-center cursor-pointer">
+    <mat-icon (click)="closeModal()"
+              class="close-container"
+              class="text-white close-container"
+              aria-label="close">
+      clear</mat-icon>
+  </div>
+</div>
+
+<div mat-dialog-content>
+
+  <div class="d-flex flex-column content mx-3 mt-2">
+    <p class="document-type pb-2">{{ documentTitle }}</p>
+    <div class="name-document d-flex justify-content-start mb-1">
+      <div class="icon d-flex justify-content-center align-items-center mr-1">
+        <img class="pdf-file"
+             src="assets/vectors/pdf-file.svg"
+             alt="latest-tag" />
+      </div>
+      <div class="name d-flex flex-column ml-2">
+        <p class="mb-0 file-description"><span class="font-weight-bold">Nombre:</span> {{nameFile}}</p>
+        <p class="mb-0 file-description size"><span class="font-weight-bold">Tamaño:</span> {{ fileSize }}</p>
+      </div>
+    </div>
+    <div *ngIf="loading"
+         class="progress-content pt-2">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div class="progress-info d-flex mb-3 justify-content-between">
+      <span class="loading-text mt-1 ml-1"
+            *ngIf="loading">Subiendo archivo... </span>
+    </div>
+    <div class="description">
+      <mat-form-field class="w-100"
+                      appearance="outline"
+                      floatLabel="always">
+        <mat-label>Descripción (*)</mat-label>
+        <input [disabled]="loading"
+               type="email"
+               [(ngModel)]="description"
+               matInput
+               placeholder="Ingrese una descripcion">
+      </mat-form-field>
+    </div>
+
+    <div class="description" *ngIf="isPaymentDocument">
+      <mat-form-field class="w-100"
+                      appearance="outline"
+                      floatLabel="always">
+        <mat-label>Contrato firmado (*)</mat-label>
+        <mat-select mat-select
+                    [(ngModel)]="contract"
+                    placeholder="Seleccione un contrato firmado...">
+          <mat-option *ngFor="let transactionType of contracts"
+                      required
+                      [value]="transactionType">
+            {{transactionType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+</div>
+
+<div mat-dialog-actions
+     class="d-flex justify-content-center mb-1">
+  <button class="secondary-button mx-3"
+          [disabled]="loading"
+          mat-stroked-button
+          color="primary"
+          [mat-dialog-close]="false">
+    {{ data.textButtonReject }}
+  </button>
+  <button [disabled]="!enableUploadButton"
+          mat-raised-button
+          color="primary"
+          (click)="uploadFiles(data.fileList)"
+          class="mx-3 primary-button">
+    {{ data.textButtonExecution }}
+  </button>
+</div>

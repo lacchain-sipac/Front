@@ -1,0 +1,104 @@
+<form [formGroup]="availabilityStructureForm">
+  <div class="row bg-white d-flex py-4 px-5">
+    <div class="col-12 mb-2">
+      <div class="row justify-content-between">
+        <div class="col align-self-center d-flex align-items-center">
+          <span class="action_title_secondary small-plus-text">
+            ¿El proceso
+            <span class="font-weight-bold">
+              {{processName}}
+            </span>
+            cuenta con disponibilidad presupuestaria?
+          </span>
+        </div>
+        <div class="mx-3 my-3">
+          <div class="switchToggle">
+            <input formControlName="viable"
+                   type="checkbox"
+                   id="switch">
+            <label for="switch">Toggle</label>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-between mb-1">
+        <div class="col align-self-center d-flex align-items-center">
+          <span class="action_title_secondary small-plus-text">
+            ¿El proceso
+            <span class="font-weight-bold">
+              {{processName}}
+            </span>
+            tiene estructura presupuestaria?
+          </span>
+        </div>
+        <div class="mx-3 my-3">
+          <div class="switchToggle">
+            <input (change)="changeHaveBudgeStructure($event)"
+                   formControlName="availabilityStructure"
+                   type="checkbox"
+                   id="switch2">
+            <label for="switch2">Toggle</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <div class="form-row">
+          <div class="col-sm-7">
+            <mat-form-field class="w-100"
+                            appearance="outline"
+                            floatLabel="always">
+              <mat-label>Estructura presupuestaria</mat-label>
+              <input formControlName="budgetStructure"
+                     matInput
+                     type="text"
+                     placeholder="Escriba su estructura presupuestaria">
+
+              <mat-error *ngIf="errorForm('budgetStructure', 'required')">
+                {{ ccRequestStepFive.budgetStructure.error.required }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('budgetStructure','maxlength')">
+                {{ ccRequestStepFive.budgetStructure.error.maxlength }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('budgetStructure','minlength')">
+                {{ ccRequestStepFive.budgetStructure.error.minlength }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-sm-7">
+            <mat-form-field class="w-100"
+                            appearance="outline"
+                            floatLabel="always">
+              <mat-label>Observación (opcional)</mat-label>
+              <input formControlName="additionalComment"
+                     matInput
+                     type="text"
+                     placeholder="Escriba su comentario adicional">
+
+              <mat-error *ngIf="errorForm('additionalComment','maxlength')">
+                {{ ccRequestStepFive.additionalComment.error.maxlength }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('additionalComment','minlength')">
+                {{ ccRequestStepFive.additionalComment.error.minlength }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mt-5">
+    <button (click)="goBack()"
+            type="button"
+            class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center">
+      Volver
+    </button>
+    <button (click)="validateForm()"
+            [type]="hasAccesEdit ? 'submit' : 'button'"
+            class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4">
+      {{textButtonNext}}
+    </button>
+  </div>
+</form>

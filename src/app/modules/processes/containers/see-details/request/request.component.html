@@ -1,0 +1,107 @@
+<ng-container *ngIf="selects$ | async; let selects;">
+    <div class="p-4" *ngIf="selectedProject.solicitude.dataProcess">
+        <ng-container>
+          <kt-card-items-list [items]="dataProcessItems" title="Datos de proceso"></kt-card-items-list>
+        </ng-container>
+        <ng-container *ngFor="let details of processDetail;index as i">
+          <hr class="separator mt-0" />
+          <kt-card-items-list [normalTitle]="true" [items]="getDetails(details)" [title]="'Financiamiento #' + (i + 1)"></kt-card-items-list>
+        </ng-container>
+      </div>
+      <ng-container *ngIf="selectedProject.solicitude.financingLine">
+        <hr class="separator mt-0" />
+        <div class="px-4 pb-4">
+          <kt-card-items-list [items]="financingLine" title="Plan de adquisiciones"></kt-card-items-list>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="selectedProject.solicitude.acquisitionMethod">
+        <hr class="separator mt-0" />
+        <div class="px-4 pb-4">
+          <kt-card-items-list [items]="acquisitionMethod" title="Método de adquisición y tipo de contrato"></kt-card-items-list>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="selectedProject.solicitude.document">
+        <hr class="separator mt-0" />
+        <div class="px-4 pb-2">
+          <span class="badge badge-pill badge-info contrast-bg semi-bold-text">Documentación Técnica</span>
+          <div *ngFor="let file of document;index as i">
+            <hr class="separator">
+            <div class="row mt-4 mb-2 px-3">
+              <div class="col-11">
+                <kt-file-details [smallFontSize]="true" [uppercase]="true" [file]="file"></kt-file-details>
+              </div>
+              <div class="col-1 d-flex justify-content-end align-items-start cursor-pointer">
+                  <mat-icon (click)="saveFile(file)"
+                  class="text-secondary cursor-pointer">file_download</mat-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="selectedProject.solicitude.dataProcess && budgetStructure">
+        <hr class="separator mt-0" />
+        <div>
+          <span class="badge badge-pill badge-info contrast-bg semi-bold-text ml-4">Disponibilidad y estructura presupuestaria</span>
+          <div class="row px-4">
+              <div class="col-6 pr-5">
+                  <div class="row justify-content-between">
+                      <div class="col align-self-center d-flex align-items-center text-question">
+                        <span class="action_title_secondary small-plus-text">
+                          ¿El proceso
+                          <span class="font-weight-bold">
+                            {{ dataProcessItems.processName }}
+                          </span>
+                          cuenta con disponibilidad presupuestaria?
+                        </span>
+                      </div>
+                      <div class="mx-3 my-3">
+                        <div class="switchToggle">
+                          <input [disabled]="true"
+                                 [checked]="budgetStructure.viable"
+                                 type="checkbox"
+                                 id="switch">
+                          <label for="switch">Toggle</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="selectedProject.solicitude.accredited" class="item-container mt-3">
+                        <span class="label-item">Acreditado por</span>
+                        <p class="value-item">{{ selectedProject.solicitude.accredited.user }}</p>
+                    </div>
+              </div>
+              <div class="col-6 pl-5">
+                  <div class="row justify-content-between">
+                      <div class="col align-self-center d-flex align-items-center text-question">
+                        <span class="action_title_secondary small-plus-text">
+                          ¿El proceso
+                          <span class="font-weight-bold">
+                              {{ dataProcessItems.processName }}
+                          </span>
+                          tiene estructura presupuestaria?
+                        </span>
+                      </div>
+                      <div class="mx-3 my-3">
+                        <div class="switchToggle">
+                          <input [disabled]="true" [checked]="budgetStructure.availabilityStructure"
+                                 type="checkbox"
+                                 id="switch">
+                          <label for="switch">Toggle</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item-container mt-3">
+                        <span class="label-item">Comentario adicional</span>
+                        <p class="value-item">{{ budgetStructure.additionalComment }}</p>
+                    </div>
+              </div>
+              <div class="col-6 pr-5">
+                    <div class="item-container">
+                        <span class="label-item">Estructura presupuestaria</span>
+                        <p class="value-item">{{ budgetStructure.budgetStructure }}</p>
+                    </div>
+              </div>
+          </div>
+        </div>
+      </ng-container>
+
+</ng-container>

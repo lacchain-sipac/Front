@@ -1,0 +1,27 @@
+<div class="toolbar-table py-2 d-flex align-items-center">
+    <div class="title-table pr-3">
+        {{ name }}
+    </div>
+    <div *ngIf="optSearch" class="input-search flex-grow-1 pl-4 d-flex flex-row align-items-center">
+        <mat-icon>search</mat-icon>
+        <input class="w-100" #filter
+            [placeholder]="placeholderSearch">
+    </div>
+    <div class="buttons pl-4 d-flex flex-row flex-grow-1 justify-content-end">
+        <button *ngIf="optFilter" class="mx-4" mat-icon-button [matMenuTriggerFor]="columnFilter">
+            <mat-icon>filter_list</mat-icon>
+        </button>
+        <ng-content select=".buttons"></ng-content>
+    </div>
+    <mat-menu #columnFilter="matMenu" yPosition="below" xPosition="before">
+        <ng-container *ngFor="let column of columns" #buttonFilter>
+            <button *ngIf="column.fixed" class="checkbox-item mat-menu-item"
+                (click)="toggleColumnVisibility(column, $event)">
+                <mat-checkbox [(ngModel)]="column.visible" class="checkbox" #checkbox
+                    (click)="$event.stopPropagation()">
+                    {{ column.name }}
+                </mat-checkbox>
+            </button>
+        </ng-container>
+    </mat-menu>
+</div>

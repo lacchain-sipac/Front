@@ -1,0 +1,12 @@
+@import "abstracts/variables";
+
+.process-phases-container {
+  background-color: #f3f1f0;
+  .content-steps-forms {
+    height: 75vh;
+    .content-forms {
+      overflow-y: auto;
+      background-color: white;
+    }
+  }
+}

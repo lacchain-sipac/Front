@@ -1,0 +1,85 @@
+<div class="d-flex flex-column m-3">
+  <div class="container content-page shadow-sm">
+    <div class="row pb-4">
+      <div class="col-md-12 col-sm-12">
+        <div class="title-page">
+          {{ title }}
+        </div>
+        <kt-breadcrumb [current]="current" [crumbs]="crumbs"></kt-breadcrumb>
+      </div>
+    </div>
+    <div class="row bg-white rounded-top" [hidden]="!hasData">
+      <div class="col-md-12 col-sm-12">
+        <kt-toolbar placeholderSearch="Buscar por nombre, apellido, usuario" optSearch="true" optFilter="true" name="Usuarios" [columns]="columns"
+          (filterChange)="onFilterChange($event)">
+          <div class="buttons d-flex align-items-center">
+            <button mat-flat-button color="primary" [routerLink]="['new']">
+              Agregar usuario
+            </button>
+          </div>
+        </kt-toolbar>
+      </div>
+    </div>
+    <div class="row bg-white list-container" [hidden]="!hasData">
+      <div class="col-md-12 col-sm-12 p-0">
+        <table class="table-material" mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)"
+          matSortActive="id" matSortDirection="desc" matSortDisableClear>
+
+          <ng-container *ngFor="let column of columns">
+            <ng-container *ngIf="column.isModelProperty" [matColumnDef]="column.property">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.name }}</th>
+              <td mat-cell *matCellDef="let row">
+                {{ getValueRow(row, column) }}
+              </td>
+            </ng-container>
+          </ng-container>
+
+          <!-- Mat-Select state -->
+          <ng-container matColumnDef="action-status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell class="form-controls" *matCellDef="let row">
+              <mat-form-field appearance="outline" floatLabel="always" (click)="$event.stopPropagation()">
+                <mat-select (click)="$event.stopPropagation()" [value]="row.status.code"
+                  (selectionChange)="onChangeStatus(row.id, $event);">
+                  <mat-option *ngFor="let status of filteredStatus(row)" [value]="status.code"> {{status.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </ng-container>
+          <!-- action view -->
+          <ng-container matColumnDef="action-view">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell class="icon-actions text-right" *matCellDef="let row">
+              <button type="button" mat-icon-button>
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- action edit -->
+          <ng-container matColumnDef="action-edit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+            <td mat-cell class="icon-actions text-right" *matCellDef="let row">
+              <button type="button" mat-icon-button (click)="$event.stopPropagation(); onClickViewEditUser(row, true);">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="visibleColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: visibleColumns;" (click)="onClickViewEditUser(row, false)"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+    <kt-empty-data type="users" [hidden]="hasData">
+      <div class="buttons-empty-data">
+        <button mat-flat-button color="primary" [routerLink]="['new']">
+          Agregar usuario
+        </button>
+      </div>
+    </kt-empty-data>
+  </div>
+</div>

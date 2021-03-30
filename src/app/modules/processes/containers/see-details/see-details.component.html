@@ -1,0 +1,24 @@
+<div class="details-container">
+  <div
+    class="d-flex flex-row justify-content-around align-items-center details-header"
+  >
+    <p
+      (click)="goBack()"
+      class="text-white col-2 mb-0 d-flex align-items-center back-btn"
+    >
+      <mat-icon class="left-arrow d-flex align-items-center">
+        keyboard_arrow_left
+      </mat-icon>
+      <span class="goBack-text">Volver</span>
+    </p>
+    <div
+      class="col-8 d-flex justify-content-center text-uppercase text-white title mb-0"
+    >
+      {{ title }}
+    </div>
+    <p class="text-white col-2"></p>
+  </div>
+  <div class="details-card mx-5 my-5">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="steps-container d-flex flex-column justify-content-start py-7 h-100">
+  <div class="text-white d-flex align-items-center btn-return pt-2 pl-1"
+       (click)="getListProcess()">
+    <button class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center">
+      Volver a la bandeja
+    </button>
+  </div>
+  <div *ngFor="let step of steps;  let i = index"
+       class="row w-100 mx-0 justify-content-end step">
+
+    <div class="col-9 d-flex justify-content-end">
+      <span [ngClass]="getClassStepText(i)">{{step}}</span>
+    </div>
+
+    <div class="col-2 px-0">
+      <div [ngClass]="getClassStepCircle(i)">
+        <span *ngIf="!isStepCompleted(i+1)">{{i+1}}</span>
+        <img *ngIf="isStepCompleted(i+1)"
+             src="assets/images/check.png"
+             class="check-icon"
+             alt="checkbtn">
+      </div>
+    </div>
+  </div>
+</div>

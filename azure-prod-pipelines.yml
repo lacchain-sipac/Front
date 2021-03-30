@@ -1,0 +1,48 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish dist as an artifact'
+  inputs:
+    targetPath: '$(Pipeline.Workspace)/s/'
+    artifact: 'source'
+    publishLocation: 'pipeline'
+
+- script: |
+   echo ****Replacing environment variables in Dockerfile****   
+   < Dockerfile sed  ' s|{{DEPLOYMENT_ENV}}|'$(DEPLOYMENT_ENV)'|g ' > Dockerfile-$(DEPLOYMENT_ENV)
+  workingDirectory: '$(Pipeline.Workspace)/s'
+  displayName: 'Setting Environment variables'
+
+- task: Docker@2
+  displayName: Build and push Docker Image Tag
+  inputs:
+    containerRegistry: '$(DOCKER_SERVICE_ENDPOINT)'
+    repository: $(DOCKER_NAME)
+    Dockerfile: '$(Pipeline.Workspace)/s/Dockerfile-$(DEPLOYMENT_ENV)'
+    buildContext: '$(Pipeline.Workspace)/s'
+
+- script: |
+   echo ****Replacing environment variables****
+   DOCKER_IMAGE_TAG=$(DOCKER_REGISTRY)/$(DOCKER_NAME):$(Build.BuildId)
+   < deployment.yml sed  ' s|{{DOCKER_IMAGE_TAG}}|'$DOCKER_IMAGE_TAG'|g ' > deployment-$(DEPLOYMENT_ENV).yml
+  workingDirectory: '$(Pipeline.Workspace)/s'
+  displayName: 'Setting Environment variables on deployment.yml file'
+
+- task: Kubernetes@1
+  displayName: 'kubectl  - Applying changes...'
+  inputs:
+    kubernetesServiceEndpoint: '$(k8S_SERVICE_ENDPOINT)'
+    command: apply
+    useConfigurationFile: true
+    configuration: '$(Pipeline.Workspace)/s/deployment-$(DEPLOYMENT_ENV).yml'
+    workingDirectory: '$(Pipeline.Workspace)/s'

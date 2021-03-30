@@ -1,0 +1,19 @@
+<div class="bg-white">
+  <ng-container *ngIf="title">
+    <span
+      *ngIf="!normalTitle"
+      class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3"
+    >
+      {{ title }}
+    </span>
+    <p *ngIf="normalTitle" class="mb-3 font-weight-bold title-text">
+      {{ title }}
+    </p>
+  </ng-container>
+  <div class="list-items-container column-list">
+    <div *ngFor="let itemKey of itemsKeys" class="item-container">
+      <span class="label-item">{{ texts[itemKey] }}</span>
+      <p class="value-item">{{ items[itemKey] }}</p>
+    </div>
+  </div>
+</div>

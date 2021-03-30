@@ -1,0 +1,71 @@
+{
+    "status": "00000",
+    "data": [
+        {
+            "id": "10001",
+            "email": "dhuamahu@everis.com",
+            "fullname": "Daniel Alberto",
+            "surnames": "Huaman Huaman",
+            "status": "A",
+            "roles": [
+                {
+                    "code": "ROLE_ADM1",
+                    "privileges": [
+                        "SOL",
+                        "LIC"
+                    ]
+                }
+            ],
+            "createdBy": "Owner",
+            "createdDate": "2020-01-07 12:10700",
+            "lastModifiedBy": "Owner",
+            "lastModifiedDate": "2020-01-07 12:10700"
+        },
+        {
+            "id": "10002",
+            "email": "colivoce@everis.com",
+            "fullname": "Clara Luisa",
+            "surnames": "Olivos Celis",
+            "status": "A",
+            "roles": [
+                {
+                    "code": "ROLE_ADM8",
+                    "privileges": [
+                        "PAG",
+                        "LIC"
+                    ]
+                },
+                {
+                    "code": "ROLE_ADM5",
+                    "privileges": [
+                        "SOL"
+                    ]
+                }
+            ],
+            "createdBy": "Owner",
+            "createdDate": "2020-01-07 12:10700",
+            "lastModifiedBy": "Owner",
+            "lastModifiedDate": "2020-01-07 12:10700"
+        },
+        {
+            "id": "10003",
+            "email": "jhuamaol@everis.com",
+            "fullname": "Julieta Daniela",
+            "surnames": "Huaman Olivos",
+            "status": "I",
+            "roles": [
+                {
+                    "code": "ROLE_ADM5",
+                    "privileges": [
+                        "SOL"
+                    ]
+                }
+            ],
+            "createdBy": "Owner",
+            "createdDate": "2020-01-07 12:10700",
+            "lastModifiedBy": "Owner",
+            "lastModifiedDate": "2020-01-07 12:10700"
+        }
+    ],
+    "message": "La consulta se realizó con éxito."
+}

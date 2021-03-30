@@ -1,0 +1,17 @@
+.table-material {
+  width: 100%;
+  .icon-actions {
+    button {
+      mat-icon {
+        font-size: 24px;
+      }
+    }
+  }
+  .form-controls {
+    mat-form-field {
+      .mat-form-field-wrapper{
+        padding-bottom: 0 !important;
+      }
+    }
+  }
+}

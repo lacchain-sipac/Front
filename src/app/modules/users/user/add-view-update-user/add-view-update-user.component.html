@@ -1,0 +1,159 @@
+<div class="d-flex flex-column m-3">
+  <div class="container content-page shadow-sm">
+    <div class="row pb-4">
+      <div class="col-md-12 col-sm-12">
+        <div class="title-page">
+          Gestión de usuarios
+        </div>
+        <kt-breadcrumb [current]="current"
+                       [crumbs]="crumbs"></kt-breadcrumb>
+      </div>
+    </div>
+    <div class="row bg-white rounded-top">
+      <div class="col-md-12 col-sm-12">
+
+        <kt-toolbar [name]="textTitlePage"
+                    placeholderSearch="Buscar por nombre, apellido, usuario">
+          <div class="buttons d-flex align-items-center">
+            <button mat-flat-button
+                    [routerLink]="['/home/users']">
+              Cancelar
+            </button>
+            <!-- TODO: poner condicion en el click -->
+            <button class="ml-3"
+                    mat-flat-button
+                    color="primary"
+                    type="submit"
+                    form="formUser"
+                    (click)="onClickAction()">
+              {{ textButtonAction }}
+            </button>
+            <button class="ml-3"
+                    *ngIf="userRequest.status.code === 'P' && !!userRequest.email"
+                    mat-flat-button
+                    color="primary"
+                    (click)="reenviar()">
+              reenviar invitación
+            </button>
+          </div>
+        </kt-toolbar>
+      </div>
+    </div>
+    <div class="row bg-white">
+      <form autocomplete="off"
+            id="formUser"
+            [formGroup]="fgUser"
+            (ngSubmit)="fgUserSubmit(fgUser)"
+            class="container mt-4">
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+            <mat-form-field class="w-100"
+                            appearance="outline"
+                            floatLabel="always">
+              <mat-label>Nombres</mat-label>
+              <input type="text"
+                     formControlName="fullname"
+                     matInput
+                     placeholder="p. ej. John">
+              <mat-error *ngIf="errorForm('fullname', 'required')">{{ ccUser.fullname.error.required }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('fullname', 'maxlength')">{{ ccUser.fullname.error.maxlength }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('fullname', 'minlength')">{{ ccUser.fullname.error.minlength }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('fullname', 'pattern')">{{ ccUser.fullname.error.pattern }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+            <mat-form-field class="w-100"
+                            appearance="outline"
+                            floatLabel="always">
+              <mat-label>Apellidos</mat-label>
+              <input type="text"
+                     formControlName="surnames"
+                     matInput
+                     placeholder="p. ej. Doe">
+              <mat-error *ngIf="errorForm('surnames', 'required')">{{ ccUser.surnames.error.required }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('surnames', 'maxlength')">{{ ccUser.surnames.error.maxlength }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('surnames', 'minlength')">{{ ccUser.surnames.error.minlength }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('surnames', 'pattern')">{{ ccUser.surnames.error.pattern }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+            <mat-form-field class="w-100"
+                            appearance="outline"
+                            floatLabel="always">
+              <mat-label>Correo electrónico</mat-label>
+              <input type="email"
+                     formControlName="email"
+                     matInput
+                     placeholder="p. ej. example@email.com">
+              <mat-error *ngIf="errorForm('email', 'required')">{{ ccUser.email.error.required }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('email', 'maxlength')">{{ ccUser.email.error.maxlength }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('email', 'minlength')">{{ ccUser.email.error.minlength }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('email', 'pattern')">{{ ccUser.email.error.pattern }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <mat-form-field class="w-100"
+                            appearance="outline"
+                            floatLabel="always">
+              <mat-label>Estado</mat-label>
+              <mat-select formControlName="status"
+                          placeholder="Seleccione un estado">
+                <mat-option *ngFor="let status of filteredStatus(userRequest)"
+                            [value]="status.code">
+                  {{status.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="errorForm('status', 'required')">{{ ccUser.status.error.required }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+            <mat-form-field class="w-100"
+                            appearance="outline"
+                            floatLabel="always">
+              <mat-label>Empresa contratista</mat-label>
+              <input type="text"
+                     formControlName="company"
+                     [matAutocomplete]="auto"
+                     matInput>
+              <mat-autocomplete #auto="matAutocomplete"
+                                [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async"
+                            [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <kt-roles *ngIf="fgUser.get('roles')"
+                      [codeRolesSelected]="codeRolesSelected"
+                      [disabled]="isDisabledRoles"
+                      [rolesFormGroup]="rolesGroup">
+            </kt-roles>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div>
+    </div>
+  </div>
+</div>

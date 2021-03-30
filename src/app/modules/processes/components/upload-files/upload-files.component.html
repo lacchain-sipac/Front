@@ -1,0 +1,47 @@
+<div class="d-flex flex-column content">
+  <p class="title-user-form-secondary font-weight-bold mb-3">
+    {{ title }}
+  </p>
+  <div class="row px-4 rounded upload justify-content-around mx-1">
+    <div *ngIf="isDisable"
+         class=" drag-drop d-flex justify-content-center align-items-center flex-column col-sm-12 col-md-12 col-lg-5 col-lg-5 py-5 my-2">
+      <div class="icon">
+        <mat-icon>cloud_upload</mat-icon>
+      </div>
+      <div class="text text-center">
+        Arrastre el documento aquí
+      </div>
+    </div>
+
+    <div *ngIf="!isDisable"
+         ktDragDrop
+         (fileDropped)="detectFiles($event)"
+         class=" drag-drop d-flex justify-content-center align-items-center flex-column col-sm-12 col-md-12 col-lg-5 col-lg-5 py-5 my-2">
+      <div class="icon">
+        <mat-icon>cloud_upload</mat-icon>
+      </div>
+      <div class="text text-center">
+        Arrastre el documento aquí
+      </div>
+    </div>
+    <div
+         class="background-line col-sm-12 col-md-12 col-lg-1 col-lg-1 d-flex justify-content-center align-items-center container text-center my-4 mx-0">
+      <div class="d-flex justify-content-center align-items-center container text-center">
+        <span class="align-middle bg-white middle-line-text">O</span>
+      </div>
+    </div>
+    <div
+         class=" input-upload d-flex justify-content-center align-items-center col-sm-12 col-md-12 col-lg-5 col-lg-5 py-5 my-2">
+      <button type="button"
+              mat-stroked-button
+              [disabled]="isDisable"
+              (click)="fileInput.click()">Examinar</button>
+      <input hidden
+             (change)="detectFiles($event)"
+             #fileInput
+             type="file"
+             id="file"
+             [multiple]="multipleFiles">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<form [formGroup]="qualityQuaranteeForm">
+  <div class="row bg-white d-flex py-4 px-5">
+    <div class="col-12 mb-2">
+      <div class="row justify-content-between">
+        <div class="col align-self-center d-flex align-items-center">
+          <span class="action_title_secondary small-plus-text">
+            ¿ Se puede realizar el cierre de este Contrato?
+          </span>
+        </div>
+        <div class="mx-3 my-3">
+          <div class="switchToggle">
+            <input formControlName="hasQualityGuarantee"
+                   type="checkbox"
+                   id="switch">
+            <label for="switch">Toggle</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <div class="form-row">
+          <div class="col-sm-7">
+            <mat-form-field class="w-100"
+                            appearance="outline"
+                            floatLabel="always">
+              <mat-label>Observación (opcional)</mat-label>
+              <input formControlName="observation"
+                     matInput
+                     type="text"
+                     placeholder="Ingrese su observación">
+
+              <mat-error *ngIf="errorForm('observation','maxlength')">
+                {{ ccRequestStepFive.additionalComment.error.maxlength }}
+              </mat-error>
+              <mat-error *ngIf="errorForm('observation','minlength')">
+                {{ ccRequestStepFive.additionalComment.error.minlength }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mt-5">
+    <button (click)="goBack()"
+            type="button"
+            class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center">
+      Volver
+    </button>
+    <button (click)="validateForm()"
+            [disabled]="!this.qualityQuaranteeForm.value.hasQualityGuarantee"
+            [type]="hasAccesEdit ? 'submit' : 'button'"
+            class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4">
+      {{textButtonNext}}
+    </button>
+  </div>
+</form>

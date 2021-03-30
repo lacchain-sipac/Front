@@ -1,0 +1,8 @@
+<div class="row bg-white p-4 rounded vh-50">
+    <div class="w-100 d-flex justify-content-center flex-column align-items-center">
+        <mat-icon class="icon-empty-grid mb-4">{{ information.icon }}</mat-icon>
+        <h4 class="mt-4 pb-1 font-weight-bold">{{ information.title }}</h4>
+        <p class="text-center mb-4">{{ information.message }}</p>
+        <ng-content select=".buttons-empty-data"></ng-content>
+    </div>
+</div>

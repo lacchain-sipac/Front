@@ -1,0 +1,78 @@
+@import "../../../../styles/abstracts/variables";
+
+.steps-container {
+  position: relative;
+  padding-top: 4em;
+  width: 250px;
+  line-height: initial;
+  // TODO: Pendiente obtener un calculo exacto de altura
+  font-size: 13px;
+  background-color: $primary-color;
+  .step {
+    margin-bottom: 1.5em;
+    position: relative;
+    right: -27px;
+  }
+}
+
+.text-disable {
+  color: #ffffffa9 !important;
+}
+
+.btn-return {
+  cursor: pointer;
+  bottom: 20px;
+  z-index: 10;
+  right: -180px;
+  position: absolute;
+}
+
+.step:last-child {
+  margin-bottom: 0 !important;
+}
+
+.icon-return {
+  width: 40px;
+  height: auto;
+  font-size: 3em;
+}
+
+.text-return {
+  font-size: 10px;
+  width: 5em;
+}
+
+.btn-circle-medium {
+  font-size: 16px;
+  width: 38px;
+  height: 38px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.inactive-text {
+  color: #b7b7b7;
+}
+
+.success-bg {
+  background-color: $success-color !important;
+}
+
+.check-icon {
+  width: 21px;
+}
+
+.contrast-bg {
+  background-color: $secondary-a-color;
+}
+
+.btn-action {
+  max-width: 190px;
+  min-height: 35px;
+  border-radius: 22.5px;
+  font-size: 13px;
+}
+
+.btn-action-primary {
+  color: #ffffff;
+  background-color: #005073;
+}

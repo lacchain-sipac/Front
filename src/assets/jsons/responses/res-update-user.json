@@ -1,0 +1,23 @@
+{
+    "status": "00000",
+    "data": {
+        "id": "10003",
+        "email": "jhuamaol@everis.com",
+        "fullname": "Julieta Daniela",
+        "surnames": "Huaman Olivos",
+        "status": "I",
+        "roles": [
+            {
+                "code": "ROLE_2",
+                "privileges": [
+                    "SOL"
+                ]
+            }
+        ],
+        "createdBy": "Owner",
+        "createdDate": "2020-01-07 12:10700",
+        "lastModifiedBy": "Owner",
+        "lastModifiedDate": "2020-01-07 12:10700"
+    },
+    "message": "Se actualizó satisfactoriamente el usuario."
+}

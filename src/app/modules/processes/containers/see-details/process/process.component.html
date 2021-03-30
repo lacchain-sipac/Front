@@ -1,0 +1,162 @@
+<div class="mx-4 px-4 py-4"
+     *ngIf="process && process.init">
+  <ng-container *ngIf="process.init.preparation">
+    <kt-card-items-list [items]="linkRepository"
+                        title="Inicio del proceso de contratación"></kt-card-items-list>
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3">
+      Documentos de preparación
+    </span>
+    <div class="form-container-steps pt-4">
+      <ng-container *ngIf="process.init.preparation.bidding">
+        <kt-document-lecture-card [documentHistory]="biddingHistory"
+                                  [isFinalDocument]="preparationViewer.isLatestVersion"
+                                  [accredited]="preparationViewer.biddingDocument.approved"
+                                  [validDocument]="biddingDocument"
+                                  title="Documentación de licitación"
+                                  [approvals]="biddingHasApprovals"></kt-document-lecture-card>
+      </ng-container>
+      <ng-container *ngIf="process.init.preparation.noObjection">
+        <hr class="separator-darker mt-0" />
+        <kt-document-lecture-card [documentHistory]="noObjectionBiddingHistory"
+                                  [validDocument]="noObjectionBidding"
+                                  title="No objeción al documento de licitación"></kt-document-lecture-card>
+      </ng-container>
+      <ng-container *ngIf="process.init.preparation.responseNoObjection">
+        <hr class="separator-darker mt-0" />
+        <kt-document-lecture-card [documentHistory]="noObjectionResponseBiddingHistory"
+                                  [validDocument]="noObjectionResponseBidding"
+                                  title="Respuesta de no objeción al documento de licitación">
+        </kt-document-lecture-card>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="clarificationsArrayValues">
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 mt-4">
+      Documentos de la sección de aclaratorias
+    </span>
+    <div class="form-container-steps pt-4 mb-3"
+         *ngFor="let clarify of clarificationsArrayValues; index as i">
+      <ng-container *ngIf="clarify.clarifyRequest">
+        <kt-document-lecture-card [documentNumber]="clarificationsArrayValues.length > 1 ? i + 1 : null"
+                                  [documentHistory]="clarify.clarifyRequestHistory"
+                                  [validDocument]="clarify.clarifyRequest"
+                                  title="Pedido de aclaratoria"></kt-document-lecture-card>
+      </ng-container>
+      <ng-container *ngIf="clarify.clarifyResponse">
+        <hr class="separator-darker mt-0" />
+        <kt-document-lecture-card [isFinalDocument]="clarify.isLatestVersion"
+                                  [accredited]="clarify.clarifyResponse.approved"
+                                  [documentHistory]="clarify.clarifyResponseHistory"
+                                  [validDocument]="clarify.clarifyResponse"
+                                  title="Aclaratoria"></kt-document-lecture-card>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="amendmentsArrayValues">
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 mt-4">
+      Documentos de la sección de enmiendas
+    </span>
+    <div class="form-container-steps pt-4 mb-3"
+         *ngFor="let amendment of amendmentsArrayValues">
+      <ng-container *ngIf="amendment.amendmentRequest">
+        <kt-document-lecture-card [documentHistory]="amendment.amendmentRequestHistory"
+                                  [validDocument]="amendment.amendmentRequest"
+                                  title="Pedido de enmienda"></kt-document-lecture-card>
+      </ng-container>
+      <ng-container *ngIf="amendment.amendmentResponse">
+        <hr class="separator-darker mt-0" />
+        <kt-document-lecture-card [isFinalDocument]="amendment.isLatestVersion"
+                                  [accredited]="amendment.amendmentResponse.approved"
+                                  [validDocument]="amendment.amendmentResponse"
+                                  [documentHistory]="amendment.amendmentResponseHistory"
+                                  [validDocument]="amendment.amendmentResponseAccredited"
+                                  title="Enmienda"></kt-document-lecture-card>
+      </ng-container>
+      <ng-container *ngIf="amendment.noObjection">
+        <hr class="separator-darker mt-0" />
+        <kt-document-lecture-card [documentHistory]="amendment.noObjectionHistory"
+                                  [validDocument]="amendment.noObjection"
+                                  title="No objeción al documento de enmienda"></kt-document-lecture-card>
+      </ng-container>
+      <ng-container *ngIf="amendment.responseNoObjection">
+        <hr class="separator-darker mt-0" />
+        <kt-document-lecture-card [documentHistory]="amendment.responseNoObjectionHistory"
+                                  [validDocument]="amendment.responseNoObjection"
+                                  title="Respuesta a la no objeción al documento de enmienda">
+        </kt-document-lecture-card>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="process.openingAct && process.openingAct.document">
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 mt-4">
+      Documentación de oferta
+    </span>
+    <div class="form-container-steps pt-4 mb-3">
+      <kt-document-lecture-card [documentHistory]="openingActHistory"
+                                [validDocument]="openingAct"
+                                title="Acta de apertura"></kt-document-lecture-card>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="comitteeMembers">
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 mt-4">
+      Miembros del comité de evaluación
+    </span>
+    <ng-container *ngFor="let member of comitteeMembers; index as i">
+      <hr *ngIf="i !== 0"
+          class="separator mt-0" />
+      <kt-card-items-list [normalTitle]="true"
+                          [items]="parseComitteMember(member)"
+                          [title]="'Miembro del comité #' + (i + 1)"></kt-card-items-list>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="process.evaluationReport">
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 mt-4">
+      Informe de evaluación
+    </span>
+    <div class="form-container-steps pt-4 mb-3">
+      <ng-container *ngIf="process.evaluationReport.evaluation">
+        <kt-document-lecture-card [documentHistory]="evaluationReportHistory"
+                                  [validDocument]="evaluationReport"
+                                  title="Informe de evaluación"></kt-document-lecture-card>
+      </ng-container>
+      <ng-container *ngIf="process.evaluationReport.noObjection">
+        <hr class="separator-darker mt-0" />
+        <kt-document-lecture-card [documentHistory]="noObjectionReportHistory"
+                                  [validDocument]="noObjectionReport"
+                                  title="No objeción al Informe de evaluación"></kt-document-lecture-card>
+      </ng-container>
+      <ng-container *ngIf="process.evaluationReport.responseNoObjection">
+        <hr class="separator-darker mt-0" />
+        <kt-document-lecture-card [documentHistory]="noObjectionResponseReportHistory"
+                                  [validDocument]="noObjectionResponseReport"
+                                  title="Respuesta a la no objeción al informe de evaluación">
+        </kt-document-lecture-card>
+      </ng-container>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="process.awardResolution && process.awardResolution.document">
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 mt-4">
+      Resolución de adjudicación
+    </span>
+    <div class="form-container-steps pt-4 mb-3">
+      <kt-document-lecture-card [documentHistory]="awardResolutionHistory"
+                                [validDocument]="awardResolution"
+                                title="Resolución de adjudicación"></kt-document-lecture-card>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="signedContractArrayValues">
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 mt-4">
+      Contrato firmado
+    </span>
+    <div class="form-container-steps pt-4 mb-3"
+         *ngFor="let contractItem of signedContractArrayValues">
+      <kt-document-lecture-card [isFinalDocument]="contractItem.isLatestVersion"
+                                [documentHistory]="contractItem.signedContractHistory"
+                                [validDocument]="contractItem.signedContract"
+                                title="Contrato firmado"></kt-document-lecture-card>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,36 @@
+<div class="title mb-4">
+    Roles
+</div>
+<div class="row" *ngIf="dataRoles && dataRoles[0]" [formGroup]="rolesFormGroup">
+    <div class="col-sm-4 col-md-4 col-lg-4" *ngFor="let rol of rolesFormGroup['controls'] | keys; let i = index">
+        <div class="containerRol d-flex flex-column border p-3 rounded">
+            <div class="contentRol d-flex flex-row" [formGroup]="rolesFormGroup['controls'][rol]">
+                <div class="check d-flex justify-content-center align-items-center mr-3">
+                    <input [formControlName]="rol" type="checkbox">
+                </div>
+                <div class="text d-flex flex-column justify-content-center align-items-start">
+                    <div class="rol">{{ dataRoles[i].name }}</div>
+                    <div class="description">{{ dataRoles[i].description }}</div>
+                </div>
+            </div>
+            <div class="containerPrivilege d-flex flex-column border-top mt-3 pt-3 pl-4"
+                *ngIf="rolesFormGroup['controls'][rol]['controls']['PRIVILEGES']"
+                [formGroup]="rolesFormGroup['controls'][rol]['controls']['PRIVILEGES']">
+                <div class="title mb-3">
+                    Privilegios
+                </div>
+                <div class="contentPrivilege d-flex flex-row"
+                    *ngFor="let privilege of rolesFormGroup['controls'][rol]['controls']['PRIVILEGES']['controls'] | keys; let x = index">
+                    <div class="check d-flex justify-content-center align-items-center mr-3">
+                        <input [formControlName]="privilege" type="checkbox">
+                    </div>
+                    <div class="text d-flex flex-column justify-content-center align-items-start">
+                        <div class="privilege">
+                            {{ dataRoles[i].privileges[x].description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

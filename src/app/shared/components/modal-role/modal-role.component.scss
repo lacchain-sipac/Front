@@ -1,0 +1,31 @@
+@import "../../../../styles/abstracts/variables";
+
+:host {
+  background: rgba(111, 111, 111, 0.2);
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.item-role {
+  border: 1px solid #E0E0E0;
+  border-radius: 6px;
+}
+
+.card-title,
+.title-role,
+.description-role {
+  color: #3c3c3c;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.container-roles {
+  width: 656px;
+}
+
+.list-roles {
+  max-height: 400px;
+}

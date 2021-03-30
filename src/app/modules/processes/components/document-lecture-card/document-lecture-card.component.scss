@@ -1,0 +1,19 @@
+@import "abstracts/variables";
+
+.contrast-bg {
+  background-color: $secondary-a-color;
+}
+
+.title-text {
+  color: $primary-color;
+  font-size: 12px;
+}
+
+.separator-darker {
+  border: solid 0.5px #979797;
+  opacity: 0.7;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

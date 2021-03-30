@@ -1,0 +1,15 @@
+<div class="process-phases-container d-flex flex-column">
+  <kt-breadcrumb-trail [activeBreadcrumb]="activeBreadcrumb" [breadcrumbTrailItems]="breadcrumbTrailItems">
+  </kt-breadcrumb-trail>
+
+  <!-- End: TODO: Pendiente borrar cuando se lance a un ambiente diferente a desarrollo -->
+
+  <div class="content-steps-forms d-flex flex-row mt-3">
+    <div class="content-steps">
+      <kt-stepper [steps]="steps" [currentStep]='currentStep'></kt-stepper>
+    </div>
+    <div class="content-forms flex-grow-1 p-5">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

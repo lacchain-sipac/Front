@@ -1,0 +1,32 @@
+@import "../../../../styles/abstracts/variables";
+
+.header {
+  background-color: $primary-color;
+  margin-left: -24px;
+  margin-right: -24px;
+  margin-top: -24px;
+  span {
+    font-weight: $semi-bold-text;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.close-container {
+  background-color: $primary-color !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.content {
+  width: 500px;
+  height: 100px;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: $primary-color;
+}

@@ -1,0 +1,185 @@
+<div class="row pt-3">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+
+    <ng-container *ngIf="retainersArrayValues">
+      <div class="mx-2" *ngFor="let company of companies">
+        <kt-documents-panel [title]="company">
+          <ng-container
+            *ngFor="let retainer of retainersArrayValues; index as i"
+          >
+            <div
+              *ngIf="retainer.preliminaryEstimateRequest.document.company === company"
+              class="form-container-steps bg-white pt-4 mb-4"
+            >
+              <div *ngIf="retainer.downPaymentRequest" class="px-4">
+                <p
+                  class="title-user-form-secondary font-weight-bold primary-text mb-3"
+                >
+                  Solicitud de anticipo
+                </p>
+                <hr class="gray-line" />
+                <div class="row mt-4 px-3">
+                  <div class="col-11">
+                    <kt-file-details
+                      [isFinalDocument]="retainer.isLatestVersion"
+                      [hasApprovalFlow]="true"
+                      [accredited]="!!retainer.downPaymentRequest.approved"
+                      [showTags]="true"
+                      [file]="retainer.downPaymentRequest.document"
+                    >
+                    </kt-file-details>
+                  </div>
+                  <div class="col-1 d-flex align-items-start">
+                    <kt-menu-action
+                      [itemIndex]="retainer.index"
+                      (clickAction)="downPaymentRequestEvent($event)"
+                      [menuOptions]="downPaymentRequestMenu(retainer)"
+                    >
+                    </kt-menu-action>
+                  </div>
+                </div>
+                <kt-reviews-list
+                  [reviewsList]="retainer.downPaymentRequest.review"
+                  [approvationReview]="retainer.downPaymentRequest.approved"
+                ></kt-reviews-list>
+              </div>
+
+              <ng-container
+                *ngIf="
+                  retainer.downPaymentRequestHistory &&
+                  retainer.downPaymentRequestHistory.length > 0
+                "
+              >
+                <kt-history-panel
+                  [history]="retainer.downPaymentRequestHistory"
+                ></kt-history-panel>
+              </ng-container>
+
+              <hr class="separator mt-0" *ngIf="retainer.isLatestVersion" />
+              <div class="px-4" *ngIf="retainer.f01Retainer">
+                <p
+                  class="title-user-form-secondary font-weight-bold primary-text mb-3"
+                >
+                  F01 de anticipo
+                </p>
+                <hr class="gray-line" />
+                <div class="row mt-4 px-3">
+                  <div class="col-11">
+                    <kt-file-details
+                      [accredited]="true"
+                      [showTags]="true"
+                      [file]="retainer.f01Retainer"
+                    ></kt-file-details>
+                  </div>
+                  <div
+                    class="col-1 d-flex justify-content-end align-items-start"
+                  >
+                    <kt-menu-action
+                      [itemIndex]="retainer.index"
+                      (clickAction)="f01RetainerEvent($event)"
+                      [menuOptions]="f01RetainerMenu"
+                    >
+                    </kt-menu-action>
+                  </div>
+                </div>
+              </div>
+
+              <ng-container
+                *ngIf="
+                  retainer.f01RetainerHistory &&
+                  retainer.f01RetainerHistory.length > 0
+                "
+              >
+                <kt-history-panel
+                  [showAllAccredited]="true"
+                  [history]="retainer.f01RetainerHistory"
+                ></kt-history-panel>
+              </ng-container>
+              <div
+                *ngIf="!retainer.f01Retainer && retainer.isLatestVersion"
+                class="px-3 pb-3"
+              >
+                <kt-upload-files
+                  [accredit]="true"
+                  [idGroup]="selectedProject.execution.payment.advance[i].id"
+                  documentType="f01Retainer"
+                  [isDisable]="!hasAccesEdit"
+                  objectInEdition="execution"
+                  title="F01 de anticipo"
+                ></kt-upload-files>
+              </div>
+
+              <hr class="separator mt-0" *ngIf="retainer.f01Retainer" />
+              <div class="px-4" *ngIf="retainer.proffPayment">
+                <p
+                  class="title-user-form-secondary font-weight-bold primary-text mb-3"
+                >
+                  Comprobante de pago de anticipo
+                </p>
+                <hr class="gray-line" />
+                <div class="row mt-4 px-3">
+                  <div class="col-11">
+                    <kt-file-details
+                      [accredited]="true"
+                      [showTags]="true"
+                      [file]="retainer.proffPayment"
+                    ></kt-file-details>
+                  </div>
+                  <div
+                    class="col-1 d-flex justify-content-end align-items-start"
+                  >
+                    <kt-menu-action
+                      [itemIndex]="retainer.index"
+                      (clickAction)="proffPaymentEvent($event)"
+                      [menuOptions]="proffPaymentMenu"
+                    >
+                    </kt-menu-action>
+                  </div>
+                </div>
+              </div>
+
+              <ng-container
+                *ngIf="
+                  retainer.proffPaymentHistory &&
+                  retainer.proffPaymentHistory.length > 0
+                "
+              >
+                <kt-history-panel
+                  [showAllAccredited]="true"
+                  [history]="retainer.proffPaymentHistory"
+                ></kt-history-panel>
+              </ng-container>
+              <div
+                *ngIf="!retainer.proffPayment && retainer.f01Retainer"
+                class="px-3 pb-3"
+              >
+                <kt-upload-files
+                  [accredit]="true"
+                  [idGroup]="selectedProject.execution.payment.advance[i].id"
+                  documentType="proofPayment"
+                  [isDisable]="!hasAccesEdit"
+                  objectInEdition="execution"
+                  title="Comprobante de pago de anticipo"
+                ></kt-upload-files>
+              </div>
+            </div>
+          </ng-container>
+        </kt-documents-panel>
+      </div>
+    </ng-container>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12">
+        <div class="container form-container-steps bg-white px-4 py-4">
+          <kt-upload-files
+            objectInEdition="execution"
+            [isDisable]="!hasAccesToUpload || isAccreditStepThree"
+            documentType="paymentRequest"
+            title="Solicitud de anticipo"
+          >
+          </kt-upload-files>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

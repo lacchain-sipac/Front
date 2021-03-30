@@ -1,0 +1,16 @@
+@import "abstracts/variables";
+
+.short-text {
+  font-size: $small-font-size;
+}
+
+.title-user-form-secondary-grey {
+  color: $secondary-color;
+  margin-bottom: -0.5em;
+}
+
+.title-user-form-secondary {
+  font-size: $medium-font-size;
+  color: $primary-color;
+  margin-bottom: -0.5em;
+}

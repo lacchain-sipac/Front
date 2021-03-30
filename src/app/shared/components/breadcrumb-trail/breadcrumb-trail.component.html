@@ -1,0 +1,10 @@
+<div class="container-fluid mt-3">
+  <ul id="breadcrumb" class="breadcrumb">
+    <li *ngFor="let breadcrumbItem of breadcrumbTrailItems; let i = index">
+      <a [ngClass]="{'breadcrumb_active': activeBreadcrumb - 1 === i}">
+        <img [src]="'assets/vectors/' + breadcrumbItem.icon +'.svg'" alt="breadcrumb">
+        {{ breadcrumbItem.name }}
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,34 @@
+@import "abstracts/variables";
+
+.box-shadow{
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.32);
+}
+
+.icon{
+  color: $secondary-color;
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.btn-action {
+  max-width: 190px;
+  max-height: 45px;
+  min-height: 45px;
+  border-radius: 22.5px;
+  border: solid 1px $primary-color;
+  font-size: $small-plus-font-size;
+}
+
+.btn-action-secondary {
+  color: #ffffff;
+  background-color: $primary-color;
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.btn-action-primary {
+  color: $primary-color;
+  background-color: #ffffff;
+}

@@ -1,0 +1,89 @@
+@import "../../../../styles/abstracts/variables";
+.notification {
+  position: fixed;
+  max-width: 50%;
+  width: auto;
+  right: -200px;
+  bottom: 40px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  min-height: 56px;
+  transition: all 0.5s ease;
+  opacity: 0;
+  z-index: 9999;
+
+  .icon-notification {
+    .material-icons {
+      color: white;
+    }
+  }
+
+  .wrap-notification {
+    ul {
+      margin: 0 !important;
+      padding: 0 !important;
+      li {
+        color: white;
+        font-size: 15px;
+        line-height: 22px;
+        padding: 0;
+        list-style-type: none;
+      }
+    }
+    .message {
+      color: white;
+      font-size: 15px;
+      line-height: 22px;
+    }
+
+    .buttons {
+      .mat-stroked-button {
+        color: white;
+      }
+    }
+  }
+}
+
+.view-notification {
+  opacity: 1;
+  right: 24px;
+  transition: all 0.5s ease;
+}
+
+.success {
+  background-color: $success-color;
+}
+
+.info {
+  background-color: $info-color;
+}
+
+.warning {
+  background-color: $warning-color;
+}
+
+.error {
+  background-color: $error-color;
+}
+
+.confirm {
+  background-color: $primary-color;
+}
+
+.showBackdrop {
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.hideBackdrop {
+  display: none;
+}

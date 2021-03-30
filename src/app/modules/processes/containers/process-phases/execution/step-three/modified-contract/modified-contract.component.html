@@ -1,0 +1,50 @@
+<div class="row pt-4">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+    <div *ngIf="!thereIsNoDocuments"
+         class="form-container-steps bg-white pt-4 mb-4">
+      <div class="px-4">
+        <p class="title-user-form-secondary font-weight-bold primary-text mb-3">
+          Modificación de contrato
+        </p>
+        <hr class="gray-line">
+        <div class="row mt-4 px-3">
+          <div class="col-11">
+            <kt-file-details [accredited]="!!documents[documents.length - 1].approved"
+                             [isFinalDocument]="!!accreditedContract"
+                             [hasApprovalFlow]="true"
+                             [uppercase]="true"
+                             [showTags]="true"
+                             [file]="documents[documents.length - 1].document">
+            </kt-file-details>
+          </div>
+          <div class="col-1 d-flex align-items-start">
+            <kt-menu-action (clickAction)="menuEvent($event)"
+                            [menuOptions]="menuOptions"
+                            [itemIndex]="documents.length - 1">
+            </kt-menu-action>
+          </div>
+        </div>
+        <kt-reviews-list [reviewsList]="documents[documents.length - 1].review"
+                         [approvationReview]="documents[documents.length - 1].approved"></kt-reviews-list>
+
+      </div>
+      <ng-container *ngIf="historyDocuments.length > 0">
+        <kt-history-panel [history]="historyDocuments"></kt-history-panel>
+      </ng-container>
+    </div>
+
+    <div class="row"
+         *ngIf="thereIsNoDocuments">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+        <div class="container form-container-steps bg-white px-4 py-4">
+          <kt-upload-files [isDisable]="!hasAccesToUpload || isAccreditStepThree"
+                           objectInEdition="execution"
+                           documentType="contractModificationStep3"
+                           title="Modificación de contrato">
+          </kt-upload-files>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

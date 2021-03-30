@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "value": "C1",
+      "shortName": "Componente 1"
+    },
+    {
+      "value": "C2",
+      "shortName": "Componente 2"
+    },
+    {
+      "value": "C3",
+      "shortName": "Componente 3"
+    }
+  ],
+  "status": "00000",
+  "message": "La consulta se ha realizado con éxito."
+}

@@ -1,0 +1,118 @@
+@import "../../../../../../styles/abstracts/variables";
+
+.header {
+  background-color: $primary-color;
+  margin-left: -24px;
+  margin-right: -24px;
+  margin-top: -24px;
+  span {
+    font-weight: $semi-bold-text;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.close-container {
+  background-color: $primary-color !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.content {
+  height: 100px;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: $primary-color;
+}
+
+.switchToggle {
+  input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+
+  label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 70px;
+    max-width: 70px;
+    height: 30px;
+    background: #d1d1d1;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+    margin-bottom: 0px;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 26px;
+      height: 26px;
+      background: #fff;
+      border-radius: 90px;
+      transition: 0.3s;
+    }
+  }
+
+  input {
+    &:checked {
+      + {
+        label, input + label {
+          background: $primary-color;
+        }
+      }
+
+      + {
+        label:before, input + label:before {
+          content: 'Si';
+          position: absolute;
+          top: 5px;
+          left: 10px;
+          width: 26px;
+          height: 26px;
+          border-radius: 90px;
+          transition: 0.3s;
+          text-indent: 0;
+          color: #fff;
+        }
+
+        label:after, input + label:after {
+          left: calc(100% - 2px);
+          transform: translateX(-100%);
+        }
+      }
+    }
+
+    + {
+      label:before, input + label:before {
+        content: 'No';
+        position: absolute;
+        top: 5px;
+        left: 35px;
+        width: 26px;
+        height: 26px;
+        border-radius: 90px;
+        transition: 0.3s;
+        text-indent: 0;
+        color: #fff;
+      }
+    }
+  }
+
+  label:active:after {
+    width: 60px;
+  }
+}
+
+.toggle-switchArea {
+  margin: 10px 0 10px 0;
+}

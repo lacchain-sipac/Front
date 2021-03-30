@@ -1,0 +1,70 @@
+<div class="d-flex flex-column m-3">
+    <div class="container content-page shadow-sm">
+        <div class="row pb-4">
+            <div class="col-md-12 col-sm-12">
+                <div class="title-page">
+                    Gestión de usuarios
+                </div>
+            </div>
+        </div>
+        <div class="row bg-white rounded-top pt-5 pb-3">
+            <div class="col-md-12 col-sm-12">
+                <form autocomplete="off" id="formUser" [formGroup]="fgUser">
+                    <div class="box-line ml-3 mr-4">
+                        <label class="title-box">Información personal</label>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                                    <mat-label>Nombres</mat-label>
+                                    <input type="text" formControlName="fullname" matInput placeholder="p. ej. John">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                                    <mat-label>Apellidos</mat-label>
+                                    <input type="text" formControlName="surnames" matInput placeholder="p. ej. Doe">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                                    <mat-label>Correo electrónico</mat-label>
+                                    <input type="email" formControlName="email" matInput
+                                        placeholder="p. ej. example@email.com">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+                                <mat-form-field class="w-100" appearance="outline" floatLabel="always">
+                                    <mat-label>Estado</mat-label>
+                                    <mat-select formControlName="status" placeholder="Selecciona un estado">
+                                        <mat-option *ngFor="let status of statusUser" [value]="status.code">
+                                            {{status.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-12 col-md-12 col-lg-12">
+                            <kt-roles *ngIf="fgUser.get('roles')"
+                                      [codeRolesSelected]="codeRolesSelected"
+                                      [disabled]="true"
+                                      [rolesFormGroup]="rolesGroup">
+                            </kt-roles>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="buttons d-flex align-items-center flex-row-reverse">
+                        <button class="ml-3" mat-flat-button (click)="goBack()">
+                            Cancelar
+                        </button>
+                        <button class="ml-3" mat-flat-button color="primary" type="submit" form="formUser" [disabled]="!fgUser.valid" (click)="onClickAction()">
+                            {{ textButtonAction }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

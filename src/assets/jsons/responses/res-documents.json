@@ -1,0 +1,26 @@
+{
+    "respuesta": {
+        "codigo": "200",
+        "mensaje": "Successful"
+    },
+    "maestro": [
+        {
+            "cod_detalle": "DNI",
+            "des_detalle": "DNI",
+            "valor1": "",
+            "valor2": ""
+        },
+        {
+            "cod_detalle": "PEX",
+            "des_detalle": "PEX",
+            "valor1": "",
+            "valor2": ""
+        },
+        {
+            "cod_detalle": "CEX",
+            "des_detalle": "CEX",
+            "valor1": "",
+            "valor2": ""
+        }
+    ]
+}

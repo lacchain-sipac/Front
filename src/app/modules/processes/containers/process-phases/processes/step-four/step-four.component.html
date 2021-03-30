@@ -1,0 +1,159 @@
+<div class="row pt-4">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+    <div
+      *ngIf="evaluationReport"
+      class="form-container-steps bg-white pt-4 mb-4"
+    >
+      <div class="px-4">
+        <p class="title-user-form-secondary font-weight-bold primary-text mb-3">
+          Informe de evaluación
+        </p>
+        <hr class="gray-line" />
+        <div class="row mt-4 px-3">
+          <div class="col-11">
+            <kt-file-details
+              [showTags]="true"
+              [file]="evaluationReport.document"
+              [hasApprovalFlow]="true"
+              [isFinalDocument]="evaluationReportViewer.isLatestVersion"
+            >
+            </kt-file-details>
+          </div>
+          <div class="col-1 d-flex align-items-start">
+            <kt-menu-action
+              (clickAction)="evaluationEvent($event)"
+              [menuOptions]="menuOptionsGroup"
+            >
+            </kt-menu-action>
+          </div>
+        </div>
+        <kt-reviews-list
+          [reviewsList]="evaluationReport.review"
+          [approvationReview]="evaluationReport.approved"
+        ></kt-reviews-list>
+      </div>
+
+      <ng-container
+        *ngIf="evaluationReportHistory && evaluationReportHistory.length > 0"
+      >
+        <kt-history-panel
+          [history]="evaluationReportHistory"
+        ></kt-history-panel>
+      </ng-container>
+
+      <hr
+        class="separator mt-0"
+        *ngIf="evaluationReportViewer.isLatestVersion"
+      />
+      <div class="px-4" *ngIf="noObjection">
+        <p class="title-user-form-secondary font-weight-bold primary-text mb-3">
+          No objeción al Informe de evaluación
+        </p>
+        <hr class="gray-line" />
+        <div class="row mt-4 px-3">
+          <div class="col-11">
+            <kt-file-details
+              [accredited]="true"
+              [showTags]="true"
+              [file]="noObjection"
+            ></kt-file-details>
+          </div>
+          <div class="col-1 d-flex justify-content-end align-items-start">
+            <kt-menu-action
+              (clickAction)="noObjectionEvent($event)"
+              [menuOptions]="noObjectionMenu"
+            >
+            </kt-menu-action>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngIf="noObjectionHistory && noObjectionHistory.length > 0">
+        <kt-history-panel [history]="noObjectionHistory"></kt-history-panel>
+      </ng-container>
+      <div
+        *ngIf="!noObjection && evaluationReportViewer.isLatestVersion"
+        class="px-3 pb-3"
+      >
+        <kt-upload-files
+          [accredit]="true"
+          documentType="evaluationReportObj"
+          objectInEdition="process"
+          title="No objeción al Informe de evaluación"
+        ></kt-upload-files>
+      </div>
+      <hr class="separator mt-0" *ngIf="noObjection" />
+
+      <div class="px-4" *ngIf="noObjectionResponse">
+        <p class="title-user-form-secondary font-weight-bold primary-text mb-3">
+          Respuesta de no objeción al informe de evaluación
+        </p>
+        <hr class="gray-line" />
+        <div class="row mt-4 px-3">
+          <div class="col-11">
+            <kt-file-details
+              [accredited]="true"
+              [showTags]="true"
+              [file]="noObjectionResponse"
+            ></kt-file-details>
+          </div>
+          <div class="col-1 d-flex justify-content-end align-items-start">
+            <kt-menu-action
+              (clickAction)="noObjectionResponseEvent($event)"
+              [menuOptions]="noObjectionResponseMenu"
+            >
+            </kt-menu-action>
+          </div>
+        </div>
+      </div>
+
+      <ng-container
+        *ngIf="
+          noObjectionResponseHistory && noObjectionResponseHistory.length > 0
+        "
+      >
+        <kt-history-panel
+          [showAllAccredited]="true"
+          [history]="noObjectionResponseHistory"
+        ></kt-history-panel>
+      </ng-container>
+      <div *ngIf="!noObjectionResponse && noObjection" class="px-3 pb-3">
+        <kt-upload-files
+          [accredit]="true"
+          documentType="evaluationReportObjResponse"
+          objectInEdition="process"
+          title="Respuesta de no objeción al informe de evaluación"
+        ></kt-upload-files>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="!evaluationReport">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+        <div class="container form-container-steps bg-white px-4 py-4">
+          <kt-upload-files
+            objectInEdition="process"
+            documentType="evaluationReport"
+            title="Informe de evaluación"
+          >
+          </kt-upload-files>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-end mt-5">
+  <button
+    (click)="goBack()"
+    class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center"
+  >
+    Volver
+  </button>
+  <button
+    (click)="next()"
+    [disabled]="!noObjectionResponse"
+    class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4"
+  >
+    {{ textButtonNext }}
+  </button>
+</div>

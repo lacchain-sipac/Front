@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: honduras-app-deployment
+  namespace: kube-honduras
+  labels:
+    app: frontend-honduras
+spec:
+#  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-honduras
+  template:
+    metadata:
+      labels:
+        app: frontend-honduras
+    spec:
+      containers:
+      - env:
+        image: {{DOCKER_IMAGE_TAG}}
+        name: image-app-honduras
+        ports:
+        - containerPort: 80
+      hostname: app-honduras
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-honduras
+  namespace: kube-honduras
+  labels:
+    app: frontend-honduras
+spec:
+  selector:
+    app: frontend-honduras
+  ports:
+    - port: 80
+      targetPort: 80
+      name: http
+  type: LoadBalancer

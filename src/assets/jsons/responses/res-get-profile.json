@@ -1,0 +1,24 @@
+{
+  "id": "5e2723b9f1589d7fc9a76153",
+  "fullname": "Jeferson Rafael",
+  "surnames": "Balcazar ggggg",
+  "email": "jefferson.everis@gmail.com",
+  "roles": [
+    {
+      "code": "ROLE_4",
+      "name": "Usuario de Consulta de Entidad Pública",
+      "description": "Visualiza los certificados de las compañías certificadas OEA nacionales y extranjeras que forman parte del ARM. ",
+      "privileges": [
+        {
+          "description": "Documentos",
+          "code": "SOL"
+        }
+      ]
+    },
+    {
+      "code": "ROLE_1",
+      "name": "Administrador de Usuarios Cadena",
+      "description": "Gestiona usuarios en la solución Cadena v1."
+    }
+  ]
+}

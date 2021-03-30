@@ -1,0 +1,51 @@
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+  <mat-tab label="Anticipo">
+    <kt-retainer
+      [codeStep]="codeStep"
+      (enableNextBtn)="retainerSection($event)"
+      [isAccreditStepThree]="isAccreditStepThree"
+      [hasAccesEdit]="hasAccesEdit"
+      [hasAccesToUpload]="hasAccesToUpload"
+      ></kt-retainer>
+    </mat-tab>
+    <mat-tab label="Pagos">
+      <kt-payments
+      [codeStep]="codeStep"
+      [isAccreditStepThree]="isAccreditStepThree"
+      (enableNextBtn)="paymentSection($event)"
+      [hasAccesEdit]="hasAccesEdit"
+      [hasAccesToUpload]="hasAccesToUpload"
+      ></kt-payments>
+    </mat-tab>
+    <mat-tab label="Pago final">
+      <kt-final-payment
+      [codeStep]="codeStep"
+      [isAccreditStepThree]="isAccreditStepThree"
+      (enableNextBtn)="finalPaymentSection($event)"
+      [hasAccesEdit]="hasAccesEdit"
+      [hasAccesToUpload]="hasAccesToUpload"
+      ></kt-final-payment>
+    </mat-tab>
+    <mat-tab label="Modificación de contrato">
+      <kt-modified-contract
+      (enableNextBtn)="contractSection($event)"
+      [hasAccesEdit]="hasAccesEdit"
+      [codeStep]="codeStep"
+    ></kt-modified-contract>
+  </mat-tab>
+</mat-tab-group>
+<div class="d-flex justify-content-end mt-5">
+  <button
+    (click)="goBack()"
+    class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center"
+  >
+    Volver
+  </button>
+  <button
+    (click)="next()"
+    [disabled]="!tabsCompleted"
+    class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4"
+  >
+    {{ textButtonNext }}
+  </button>
+</div>

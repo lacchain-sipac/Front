@@ -1,0 +1,14 @@
+{
+  "status": "00000",
+  "data": {
+    "processName": "Programa de integración Vial Regional",
+    "entryDate": "2020-01-07 12:10700",
+    "operationNumber": "BL-HO-2",
+    "status": "D",
+    "createdBy": "Owner",
+    "createdDate": "2020-01-07 12:10700",
+    "lastModifiedBy": "Owner",
+    "lastModifiedDate": "2020-01-07 12:10700"
+  },
+  "message": "Se agregó satisfactoriamente el proceso."
+}

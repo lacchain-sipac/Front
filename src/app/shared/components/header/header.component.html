@@ -1,0 +1,58 @@
+<header class="d-flex justify-content-between align-items-center px-4">
+  <div class="logo"></div>
+  <div class="version-app">
+    <span> <strong>Versión :</strong> {{ versionApp }}</span>
+  </div>
+  <div class="user d-flex align-items-center border-left pl-4" (menuOpened)="menuOpened()" (menuClosed)="menuClosed()"
+    [matMenuTriggerFor]="userProfile">
+    <mat-icon class="icon-account">account_circle</mat-icon>
+    <div class="d-flex flex-column mx-2">
+      <span class="label-user">{{ profile?.fullname }}</span>
+      <span class="label-role">{{ currentRole }}</span>
+    </div>
+    <mat-icon class="icon-arrow">keyboard_arrow_down</mat-icon>
+  </div>
+</header>
+<mat-menu class="menu-card" [class]="'custom-panel-menu'" #userProfile="matMenu" yPosition="below" xPosition="before">
+  <div class="d-flex flex-row px-3 pb-1 content-profile">
+    <div class="options-user d-flex flex-column">
+      <span class="username"></span>
+      <div class="menu-user">
+        <mat-list class="list-menu">
+          <h3 class="primary-text mt-1" mat-subheader>{{ profile?.email }}</h3>
+          <mat-list-item (click)="openOptionMenu(menu)" *ngFor="let menu of menus">
+            <mat-icon class="menu-icon" mat-list-icon>{{ menu.icon}}</mat-icon>
+            <span class="menu-item-text" mat-line> {{menu.shortName}} </span>
+          </mat-list-item>
+
+          <mat-list-item (click)="changeRole()">
+            <mat-icon class="menu-icon" mat-list-icon>sync_alt</mat-icon>
+            <span class="menu-item-text" mat-line> Cambiar rol </span>
+          </mat-list-item>
+
+          <mat-divider></mat-divider>
+          <div (click)="togglePanel($event)" class="position-relative d-flex flex-column align-items-center rounded border mt-2 mb-2 p-2">
+            <div [ngClass]="{'mb-2': panelOpenState}" class="titleQR">
+              Asociar dispositivo
+            </div>
+            <div *ngIf="panelOpenState" style="top: 0; right: 0; cursor: pointer;"
+              class="position-absolute p-2 d-flex flex-column align-items-center"
+              (click)="$event.stopPropagation(); getStatetToQR()">
+              <mat-icon>refresh</mat-icon>
+            </div>
+            <mat-expansion-panel [expanded]="panelOpenState" [disabled]="true" class="qrcode">
+              <qrcode *ngIf="urlQR" [qrdata]="urlQR" [width]="240" [errorCorrectionLevel]="'M'"></qrcode>
+              <mat-spinner *ngIf="!urlQR"></mat-spinner>
+            </mat-expansion-panel>
+          </div>
+
+          <mat-list-item (click)="logout()">
+            <mat-icon class="menu-icon" mat-list-icon>exit_to_app</mat-icon>
+            <span class="menu-item-text" mat-line> Cerrar sesión </span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+</mat-menu>
+<div [style.height.px]="secondHeaderHeight" class="d-flex justify-content-center align-items-center head-section"></div>

@@ -1,0 +1,30 @@
+<button class="d-flex justify-content-center align-items-center" [ngClass]="{ 'disabled' : isDisabled }" type="button" mat-icon-button [matMenuTriggerFor]="menu" #menuActionView="matMenuTrigger"
+  [matTooltip]="tooltipText" [matTooltipPosition]="position">
+  <ng-container *ngIf="isActionsToPhases">
+    <mat-icon [style.width.em]="btnWidthEm" class="align-self-center align-middle btn-icon" aria-hidden="false" aria-label="menu" [svgIcon]="menuIcon">
+      {{ showDefaultIcon && defaultBtnIcon }}
+      </mat-icon>
+  </ng-container>
+  <ng-container *ngIf="!isActionsToPhases">
+    <div class="align-self-center align-middle btn-icon">
+      <span class="text-actions">Acciones</span>
+    </div>
+  </ng-container>
+</button>
+<mat-menu [overlapTrigger]="false" id="menu" #menu="matMenu">
+  <mat-list class="list-menu">
+    <ng-container *ngFor="let option of menuOptions">
+      <mat-list-item (click)="fileInputReplace.click()" *ngIf="actionsThatFireFilePicker.includes(option.action)">
+        <mat-icon mat-list-icon>{{ option.icon}}</mat-icon>
+        <span mat-line> {{option.shortName}} </span>
+      </mat-list-item>
+
+      <input hidden (change)="onClick(option.action, $event)" #fileInputReplace type="file" id="file">
+
+      <mat-list-item (click)="onClick(option.action)"  *ngIf="!actionsThatFireFilePicker.includes(option.action)">
+        <mat-icon mat-list-icon>{{ option.icon}}</mat-icon>
+        <span mat-line> {{option.shortName}} </span>
+      </mat-list-item>
+    </ng-container>
+  </mat-list>
+</mat-menu>

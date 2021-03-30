@@ -1,0 +1,11 @@
+@mixin breadcrumb--sm() {
+  .breadcrumb {
+    display: table;
+    li {
+      display: table-cell;
+      a {
+        padding-left: 40px;
+      }
+    }
+  }
+}

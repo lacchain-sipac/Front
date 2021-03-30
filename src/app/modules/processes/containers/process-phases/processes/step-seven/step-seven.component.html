@@ -1,0 +1,87 @@
+<div class="row pt-4">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-1">
+    <ng-container *ngIf="signedContractArrayValues">
+      <ng-container *ngFor="let signedContract of signedContractArrayValues; index as i">
+        <div class="form-container-steps bg-white pt-4 mb-4">
+          <div class="px-4">
+            <p class="title-user-form-secondary font-weight-bold primary-text mb-3">
+              Contrato firmado
+            </p>
+            <hr class="gray-line" />
+            <div class="row mt-4 px-3">
+              <div class="col-11">
+                <kt-file-details [uppercase]="true"
+                                 [showTags]="true"
+                                 [accredited]="!!signedContract.signedContract.approved"
+                                 [isFinalDocument]="!!signedContract.isLatestVersion"
+                                 [hasApprovalFlow]="true"
+                                 [file]="signedContract.signedContract.document">
+                </kt-file-details>
+              </div>
+              <div class="col-1 d-flex align-items-start">
+                <kt-menu-action (clickAction)="menuEvent($event)"
+                                [menuOptions]="menuOptions(signedContract)"
+                                [itemIndex]="i">
+                </kt-menu-action>
+              </div>
+            </div>
+            <kt-reviews-list [reviewsList]="signedContract.signedContract.review"
+                             [approvationReview]="signedContract.signedContract.approved"></kt-reviews-list>
+          </div>
+          <ng-container *ngIf="
+          signedContract.signedContractHistory &&
+          signedContract.signedContractHistory.length > 0">
+            <kt-history-panel [history]="signedContract.signedContractHistory"></kt-history-panel>
+          </ng-container>
+        </div>
+      </ng-container>
+    </ng-container>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+        <div class="container form-container-steps bg-white px-4 py-4">
+          <kt-upload-files objectInEdition="process"
+                           [isDisable]="!hasAccesEdit"
+                           documentType="signedContractDocument"
+                           title="Contrato firmado">
+          </kt-upload-files>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-6 col-lg-6 mb-4">
+    <div class="container form-container-steps bg-white px-4 pt-4">
+      <span class="badge badge-pill badge-info contrast-bg semi-bold-text">N° de Prism</span>
+      <div class="row mt-3">
+        <div class="col-sm-12">
+          <mat-form-field class="w-100"
+                          appearance="outline"
+                          floatLabel="always">
+            <mat-label>N° de Prism</mat-label>
+            <input [(ngModel)]="numberPrism"
+                   maxlength="1000"
+                   type="text"
+                   matInput
+                   [disabled]="!hasAccesEdit"
+                   placeholder="Ingrese el número de Prism…" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-end mt-3">
+  <button (click)="goBack()"
+          class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center">
+    Volver
+  </button>
+  <button (click)="next()"
+          [disabled]="buttonNextDisabled"
+          class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4">
+    {{ textButtonNext }}
+  </button>
+</div>

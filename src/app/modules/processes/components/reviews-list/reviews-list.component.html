@@ -1,0 +1,22 @@
+<div *ngIf="reviewsList || approvationReview"
+     class="row revisions-container">
+  <div class="col-11 ml-auto">
+    <p [ngClass]="[titleStyles]"
+       class="short-text font-weight-bold mb-1">Revisiones</p>
+
+    <ng-container *ngIf="approvationReview">
+      <kt-approval-bubble [disabled]="disabled"
+                          [revision]="approvationReview">
+      </kt-approval-bubble>
+    </ng-container>
+
+    <ng-container *ngIf="reviewsList">
+      <ng-container *ngFor="let approval of reviewsList">
+        <kt-approval-bubble [disabled]="disabled"
+                            [revision]="approval">
+        </kt-approval-bubble>
+      </ng-container>
+    </ng-container>
+
+  </div>
+</div>
