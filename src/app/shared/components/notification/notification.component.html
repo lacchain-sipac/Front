@@ -1,0 +1,31 @@
+<div *ngIf="!isConfirmAlert" class="notification d-flex {{ cssClassNotification }}">
+  <div class="icon-notification p-3 d-flex justify-content-center align-items-center">
+    <mat-icon>{{ iconNotification }}</mat-icon>
+  </div>
+  <div class="wrap-notification p-3 d-flex justify-content-center align-items-center">
+    <ul>
+      <li *ngFor="let msg of alert.messages">{{ msg }}</li>
+    </ul>
+    <button mat-stroked-button class="ml-3 text-white" (click)="onCloseMsg()">
+      CERRAR
+    </button>
+  </div>
+</div>
+
+<div *ngIf="isConfirmDialog" class="notification d-flex {{ cssClassDialog }}">
+
+  <div class="wrap-notification p-3 d-flex justify-content-center align-items-center">
+    <div class="message">{{ dialog.message }}</div>
+    <div class="buttons pl-3 d-flex justify-content-center align-items-center">
+      <button mat-stroked-button class="text-white" (click)="onNoDialog()">{{ dialog.msgNo | uppercase }}</button>
+      <button mat-stroked-button class="text-white" color="primary" (click)="onSiDialog()">
+        {{ dialog.msgSi | uppercase }}
+      </button>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="{{ backdropClass }}">
+</div>

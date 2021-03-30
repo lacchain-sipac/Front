@@ -1,0 +1,61 @@
+@import "abstracts/variables";
+
+.details-header {
+  background-color: $primary-color;
+  height: 60px;
+  .title {
+    font-size: 20px;
+  }
+  .goBack-text {
+    font-size: 14px;
+  }
+}
+
+.back-btn {
+  cursor: pointer;
+}
+
+.details-container {
+  background-color: #f3f1f0;
+}
+
+.left-arrow {
+  font-size: 30px;
+  margin-right: 0.5em;
+}
+
+.list-items-container {
+  background-color: white;
+}
+
+.label-item {
+  color: $primary-color;
+  font-size: 10px;
+}
+
+.column-list {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(50%, 1fr) );
+}
+
+.value-item {
+  color: #87786e;
+  font-size: 12px;
+}
+
+.contrast-bg {
+  background-color: $secondary-a-color;
+}
+
+.semi-bold-text {
+  font-weight: $semi-bold-text;
+}
+
+.title-text {
+  color: $primary-color;
+  font-size: 12px;
+}
+
+.item-container {
+  grid-column: span 1;
+}

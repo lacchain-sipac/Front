@@ -1,0 +1,33 @@
+{
+  "status": "00000",
+  "data": [
+    {
+      "detailRole": "",
+      "id": "1",
+      "role": {
+        "id": "ROLE_DIR_ADJ",
+        "name": "Director Adjunto"
+      },
+      "user": "brenda mesias"
+    },
+    {
+      "detailRole": "",
+      "id": "2",
+      "role": {
+        "id": "ROLE_SUP",
+        "name": "Supervisor"
+      },
+      "user": "emma ardiles"
+    },
+    {
+      "detailRole": "Nuevo rol",
+      "id": "3",
+      "role": {
+        "id": "99",
+        "name": "Otro"
+      },
+      "user": "cesar antonio"
+    }
+  ],
+  "message": "La consulta se realizó con éxito."
+}

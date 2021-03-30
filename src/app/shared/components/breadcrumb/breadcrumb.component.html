@@ -1,0 +1,9 @@
+<div class="breadcrumbs d-flex flex-row align-items-center">
+    <div class="crumb d-flex flex-row align-items-center" *ngFor="let crumb of crumbs">
+        <div class="link">{{ crumb }}</div>
+        <mat-icon class="chevron">chevron_right</mat-icon>
+    </div>
+    <div class="crumb current d-flex flex-row align-items-center">
+        <div class="link">{{ current }}</div>
+    </div>
+</div>

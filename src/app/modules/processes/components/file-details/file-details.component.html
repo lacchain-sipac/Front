@@ -1,0 +1,112 @@
+<div class="row word-wrap">
+  <div class="col-1 d-flex justify-content-center align-items-start">
+    <img class="file-clarifying-icon"
+         [src]="fileIcon"
+         alt="file" />
+  </div>
+  <div class="col-10">
+    <div class="row mb-2">
+      <div class="col-12">
+        <p [ngClass]="[
+            'text-uppercase title-user-form-secondary',
+            'primary-text font-weight-bold',
+            disabledClass,
+            titleStyles
+          ]">
+          {{ file.fileName }}
+        </p>
+
+        <div class="row">
+          <ng-container *ngIf="showTags && !isFinalDocument">
+            <div class="col-12 d-flex">
+              <p [ngClass]="[
+                  'informative-tag d-flex justify-content-center d-flex align-items-center',
+                  disabledTag
+                ]">
+                <img class="latest-tag"
+                     [src]="tagIcon"
+                     alt="latest-tag" /><span>{{ version ? 'Versión ' + version : 'Última versión' }}</span>
+              </p>
+              <p *ngIf="accredited"
+                 class="informative-tag accredited d-flex justify-content-center d-flex align-items-center">
+                <img class="latest-tag"
+                     src="assets/vectors/accredited.svg"
+                     alt="latest-tag" /><span>Acreditado</span>
+              </p>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isFinalDocument">
+            <div class="col-12 d-flex">
+              <p [ngClass]="[
+                  'informative-tag latest-version-tag d-flex justify-content-center d-flex align-items-center',
+                  disabledTag
+                ]">
+                <img class="last-tag"
+                     src="assets/vectors/latest.svg"
+                     alt="latest-tag" /><span>Versión final</span>
+              </p>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+        <span class="primary-text font-weight-bold"
+              [ngClass]="[disabledClass, labelStyles]">
+          {{ 'Descripción del documento' }}
+        </span>
+        <p class="secondary-text semi-bold-text mb-0"
+           [ngClass]="[valueStyles]">
+          {{ file.observation }}
+        </p>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6 "
+           *ngIf="file.signedContract">
+        <span class="primary-text font-weight-bold"
+              [ngClass]="[disabledClass, labelStyles]">
+          Contrato firmado
+        </span>
+        <p class="secondary-text semi-bold-text mb-0"
+           [ngClass]="[valueStyles]">
+          {{ file.signedContract }}
+        </p>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+        <span class="primary-text font-weight-bold"
+              [ngClass]="[disabledClass, labelStyles]">
+          {{ accredited && !hasApprovalFlow ? 'Acreditado' : 'Adjuntado' }}
+          por
+        </span>
+        <p class="secondary-text semi-bold-text mb-0"
+           [ngClass]="[valueStyles]">
+          {{ file.user }}
+        </p>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+        <span class="primary-text font-weight-bold"
+              [ngClass]="[disabledClass, labelStyles]">Fecha</span>
+        <p class="secondary-text semi-bold-text mb-0"
+           [ngClass]="[valueStyles]">
+          {{ file.dateCreation | date: 'dd/MM/yyyy h:mm aaa' }}
+        </p>
+      </div>
+    </div>
+    <div *ngIf="file.hash"
+         class="row mb-2">
+      <div class="col-sm-6 col-md-6 col-lg-6 col-lg-6">
+        <span class="primary-text font-weight-bold"
+              [ngClass]="[disabledClass, labelStyles]">Hash</span>
+        <p class="secondary-text semi-bold-text mb-0"
+           [ngClass]="[valueStyles]">
+          {{ file.hash }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

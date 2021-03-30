@@ -1,0 +1,94 @@
+@import "abstracts/variables";
+
+.gray-line {
+  border: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+.title-user-form-secondary {
+  max-width: 400px;
+  font-size: $medium-font-size;
+  margin-bottom: -0.1em;
+}
+
+.primary-text {
+  color: $primary-color;
+}
+
+.short-text {
+  font-size: $small-font-size;
+}
+
+.border-top-dashed {
+  border-top: dashed 2px #979797;
+}
+
+.secondary-text {
+  color: $secondary-color;
+}
+
+*:focus {
+  outline: none !important;
+  border: 0 !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+::ng-deep .mat-menu-content:not(:empty) {
+  padding: 0px !important;
+}
+
+.menu-item {
+  color: $secondary-color;
+  &:hover {
+    * {
+      color: #ffffff;
+    }
+    background-color: $primary-color;
+  }
+}
+
+
+.form-container-steps{
+  border-radius: 4px;
+  border: solid 1px #b5b5b5;
+}
+
+.title-user-form-secondary {
+  font-size: $medium-font-size;
+  color: $primary-color;
+  margin-bottom: -0.5em;
+}
+
+.no-file-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.no-file-text {
+  color: #87786e;
+  font-size: 16px;
+}
+
+.btn-action {
+  max-width: 190px;
+  max-height: 45px;
+  min-height: 45px;
+  border-radius: 22.5px;
+  border: solid 0.5px $primary-color;
+  font-size: $small-plus-font-size;
+}
+
+.btn-action-secondary {
+  color: #ffffff;
+  background-color: $primary-color;
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.btn-action-primary {
+  color: $primary-color;
+  background-color: #ffffff;
+}

@@ -1,0 +1,35 @@
+@import "abstracts/variables";
+@import "main.scss";
+
+.login {
+  height: 100vh;
+  .content-login {
+    width: 400px;
+    .header {
+      margin: 40px 20px 0;
+      .logo {
+        background-image: url("/assets/vectors/logo-bid.svg");
+        background-repeat: no-repeat;
+        width: 103px;
+        height: 40px;
+      }
+    }
+    .body {
+      padding: 0 30px;
+      .default-login {
+        flex: 1 55%;
+        }
+      }
+    }
+  }
+  .powered {
+    margin-top: 20px;
+    img {
+      width: 220px;
+    }
+  }
+
+.bottom-logo {
+  width: 10em;
+  height: auto;
+}

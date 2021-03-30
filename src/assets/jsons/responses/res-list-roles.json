@@ -1,0 +1,130 @@
+{
+    "status": "00000",
+    "data": [
+        {
+            "code": "ROLE_ADM1",
+            "name": "Administrador de sistemas 1",
+            "description": "Rol que se encarga de administrar los sistemas del banco",
+            "privileges": [
+                {
+                    "code": "SOL",
+                    "description": "Privilegios de solicitante"
+                },
+                {
+                    "code": "LIC",
+                    "description": "Privilegios de licenciado"
+                },
+                {
+                    "code": "PAG",
+                    "description": "Privilegios de paginador"
+                }
+            ]
+        },
+        {
+            "code": "ROLE_ADM2",
+            "name": "Administrador de sistemas 2",
+            "description": "Rol que se encarga de administrar los sistemas del everis",
+            "privileges": [
+                {
+                    "code": "SOL",
+                    "description": "Privilegios de solicitante"
+                },
+                {
+                    "code": "LIC",
+                    "description": "Privilegios de licenciado"
+                }
+            ]
+        },
+        {
+            "code": "ROLE_ADM3",
+            "name": "Administrador de sistemas 3",
+            "description": "Rol que se encarga de administrar los sistemas del everis",
+            "privileges": [
+                {
+                    "code": "SOL",
+                    "description": "Privilegios de solicitante"
+                }
+            ]
+        },
+        {
+            "code": "ROLE_ADM4",
+            "name": "Administrador de sistemas 4",
+            "description": "Rol que se encarga de administrar los sistemas del everis",
+            "privileges": [
+                {
+                    "code": "SOL",
+                    "description": "Privilegios de solicitante"
+                },
+                {
+                    "code": "LIC",
+                    "description": "Privilegios de licenciado"
+                },
+                {
+                    "code": "PAG",
+                    "description": "Privilegios de detallista"
+                }
+            ]
+        },
+        {
+            "code": "ROLE_ADM5",
+            "name": "Administrador de sistemas 5",
+            "description": "Rol que se encarga de administrar los sistemas del everis",
+            "privileges": [
+                {
+                    "code": "SOL",
+                    "description": "Privilegios de solicitante"
+                },
+                {
+                    "code": "LIC",
+                    "description": "Privilegios de licenciado"
+                }
+            ]
+        },
+        {
+            "code": "ROLE_ADM6",
+            "name": "Administrador de sistemas 6",
+            "description": "Rol que se encarga de administrar los sistemas del everis",
+            "privileges": [
+                {
+                    "code": "SOL",
+                    "description": "Privilegios de solicitante"
+                },
+                {
+                    "code": "LIC",
+                    "description": "Privilegios de licenciado"
+                }
+            ]
+        },
+        {
+            "code": "ROLE_ADM7",
+            "name": "Administrador de sistemas 7",
+            "description": "Rol que se encarga de administrar los sistemas del everis",
+            "privileges": [
+                {
+                    "code": "SOL",
+                    "description": "Privilegios de solicitante"
+                },
+                {
+                    "code": "LIC",
+                    "description": "Privilegios de licenciado"
+                }
+            ]
+        },
+        {
+            "code": "ROLE_ADM8",
+            "name": "Administrador de sistemas 8",
+            "description": "Rol que se encarga de administrar los sistemas del everis",
+            "privileges": [
+                {
+                    "code": "PAG",
+                    "description": "Privilegios de solicitante"
+                },
+                {
+                    "code": "LIC",
+                    "description": "Privilegios de licenciado"
+                }
+            ]
+        }
+    ],
+    "message": "La consulta se realizó con éxito."
+}

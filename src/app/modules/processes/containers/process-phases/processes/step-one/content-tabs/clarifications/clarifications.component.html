@@ -1,0 +1,119 @@
+<div class="row pt-4">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+    <ng-container *ngIf="clarificationsArrayValues">
+      <div
+        *ngFor="let clarify of clarificationsArrayValues; index as i"
+        class="form-container-steps bg-white pt-4 mb-4"
+      >
+        <div *ngIf="clarify.clarifyRequest" class="px-4">
+          <p
+            class="title-user-form-secondary font-weight-bold primary-text mb-3"
+          >
+            Pedido de aclaratoria
+          </p>
+          <hr class="gray-line" />
+          <div class="row mt-4 px-3">
+            <div class="col-11">
+              <kt-file-details
+                [accredited]="true"
+                [showTags]="true"
+                [file]="clarify.clarifyRequest"
+              >
+              </kt-file-details>
+            </div>
+            <div class="col-1 d-flex align-items-start">
+              <kt-menu-action
+                [itemIndex]="i"
+                (clickAction)="clarifyRequestEvent($event)"
+                [menuOptions]="clarifyRequestMenu"
+              >
+              </kt-menu-action>
+            </div>
+          </div>
+        </div>
+
+        <ng-container
+          *ngIf="
+            clarify.clarifyRequestHistory &&
+            clarify.clarifyRequestHistory.length > 0
+          "
+        >
+          <kt-history-panel
+            [showAllAccredited]="true"
+            [history]="clarify.clarifyRequestHistory"
+          ></kt-history-panel>
+        </ng-container>
+
+        <hr class="separator mt-0" *ngIf="clarify.clarifyRequest" />
+        <div class="px-4" *ngIf="clarify.clarifyResponse">
+          <p
+            class="title-user-form-secondary font-weight-bold primary-text mb-3"
+          >
+            Aclaratoria
+          </p>
+          <hr class="gray-line" />
+          <div class="row mt-4 px-3">
+            <div class="col-11">
+              <kt-file-details
+                [isFinalDocument]="clarify.isLatestVersion"
+                [hasApprovalFlow]="true"
+                [accredited]="!!clarify.clarifyResponse.approved"
+                [showTags]="true"
+                [file]="clarify.clarifyResponse.document"
+              ></kt-file-details>
+            </div>
+            <div class="col-1 d-flex justify-content-end align-items-start">
+              <kt-menu-action
+                [itemIndex]="i"
+                (clickAction)="clarifyEvent($event)"
+                [menuOptions]="clarifyMenuOptions(clarify)"
+              >
+              </kt-menu-action>
+            </div>
+          </div>
+
+          <kt-reviews-list
+            [reviewsList]="clarify.clarifyResponse.review"
+            [approvationReview]="clarify.clarifyResponse.approved"
+          ></kt-reviews-list>
+        </div>
+
+        <ng-container
+          *ngIf="
+            clarify.clarifyResponseHistory &&
+            clarify.clarifyResponseHistory.length > 0
+          "
+        >
+          <kt-history-panel
+            [history]="clarify.clarifyResponseHistory"
+          ></kt-history-panel>
+        </ng-container>
+        <div
+          *ngIf="clarify.clarifyRequest && !clarify.clarifyResponse"
+          class="px-3 pb-3"
+        >
+          <kt-upload-files
+            [idGroup]="selectedProject.process.init.clarify[i].id"
+            documentType="clarifyingResponse"
+            objectInEdition="process"
+            title="Aclaratoria"
+          ></kt-upload-files>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+        <div class="container form-container-steps bg-white px-4 py-4">
+          <kt-upload-files
+            [accredit]="true"
+            objectInEdition="process"
+            documentType="clarificationRequest"
+            title="Pedido de aclaratoria"
+          >
+          </kt-upload-files>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

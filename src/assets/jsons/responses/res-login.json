@@ -1,0 +1,19 @@
+{
+    "status": "00000",
+    "data": {
+        "id": "10001",
+        "email": "dhuamahu@everis.com",
+        "fullname": "Daniel Alberto",
+        "surnames": "Huaman Huaman",
+        "roles": [
+            {
+                "code": "ROLE_ADM1",
+                "privileges": [
+                    "SOL",
+                    "LIC"
+                ]
+            }
+        ]
+    },
+    "message": "Inicio de sesión satisfactorio"
+}

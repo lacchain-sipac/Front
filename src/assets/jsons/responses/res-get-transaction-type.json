@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "value": "cash",
+      "shortName": "Efectivo"
+    },
+    {
+      "value": "creditCard",
+      "shortName": "Tarjeta de credito"
+    },
+    {
+      "value": "debitCard",
+      "shortName": "Tarjeta de debito"
+    }
+  ],
+  "status": "00000",
+  "message": "La consulta se realizó con éxito."
+}

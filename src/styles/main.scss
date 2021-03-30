@@ -1,0 +1,69 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/placeholders";
+
+@import "base/reset";
+@import "base/typography";
+
+@import "components/button";
+@import "components/dropdown";
+@import "components/table";
+
+@import "themes/md-kaytrust";
+
+@import "shame";
+
+// Estilos globales del proyecto
+
+.content-page {
+  margin-top: -150px;
+  margin-bottom: 100px;
+  .title-page {
+    font-size: 24px;
+    color: #fff;
+  }
+}
+
+.head-section {
+  background-color: $primary-color;
+}
+
+body::-webkit-scrollbar {
+  width: 1px;
+  height: 8px;
+  display: none;
+}
+
+::ng-deep button.secondary-button {
+  background-color: white !important;
+  border-radius: 25px !important;
+  border-color: $primary-color !important;
+  color: $primary-color !important;
+  min-width: 9em !important;
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+::ng-deep button.primary-button {
+  background-color: $primary-color !important;
+  border-radius: 25px !important;
+  border-color: $primary-color !important;
+  color: white !important;
+  min-width: 9em !important;
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}

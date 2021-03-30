@@ -1,0 +1,17 @@
+@import "../../../../styles/abstracts/variables";
+
+.box-line {
+    border: 1px solid $secondary-color;
+    border-radius: 4px;
+    padding-left: 16px;
+    padding-top: 16px;
+    padding-right: 16px;
+    padding-bottom: 30px;
+    margin-bottom: 16px;
+}
+
+.title-box {
+    color: $primary-color;
+    $small-font-size: 12px;
+    font-weight: 600;
+}

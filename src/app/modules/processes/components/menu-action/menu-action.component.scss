@@ -1,0 +1,62 @@
+@import '../../../../../styles/abstracts/variables';
+
+*:focus {
+  outline: none !important;
+  border: 0 !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+::ng-deep .mat-menu-content:not(:empty) {
+  padding: 0px !important;
+}
+
+.list-menu mat-list-item {
+  font-size: 13px;
+  color: $secondary-color;
+  cursor: pointer;
+  border-radius: 0px !important;
+  height: 50px;
+
+  &:hover {
+    * {
+      color: #ffffff;
+    }
+    background-color: $primary-color;
+  }
+}
+
+mat-icon.btn-icon {
+  color: #87786e;
+  &:hover {
+    color: $primary-color !important;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.text-actions {
+  color: #005073;
+  display: flex;
+  font-size: 13px;
+  justify-content: center;
+  right: 1px;
+  align-items: center;
+  top: 1px;
+  position: absolute;
+  height: 30px;
+  padding: 0em 0.6em;
+  cursor: pointer;
+  border: 1px solid #005073;
+  border-radius: 7px;
+}
+
+.text-actions:hover {
+  color: #797979;
+  border-color: #797979;
+}

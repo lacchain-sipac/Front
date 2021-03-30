@@ -1,0 +1,187 @@
+<div class="row pt-3">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+
+    <ng-container *ngIf="paymentsArrayValues">
+      <div class="mx-2" *ngFor="let company of companies">
+        <kt-documents-panel [title]="company">
+          <ng-container
+            *ngFor="let amendment of paymentsArrayValues; index as i"
+          >
+            <div
+              *ngIf="amendment.preliminaryEstimateRequest.document.company === company"
+              class="form-container-steps bg-white pt-4 mb-4"
+            >
+              <div class="px-4">
+                <p
+                  class="title-user-form-secondary font-weight-bold primary-text mb-3"
+                >
+                Pago de estimación
+                </p>
+                <hr class="gray-line" />
+                <div class="row mt-4 px-3">
+                  <div class="col-11">
+                    <kt-file-details
+                      [showTags]="true"
+                      [isFinalDocument]="amendment.isLatestVersion"
+                      [hasApprovalFlow]="true"
+                      [accredited]="!!amendment.estimateRequest.approved"
+                      [file]="amendment.estimateRequest.document"
+                    >
+                    </kt-file-details>
+                  </div>
+                  <div class="col-1 d-flex align-items-start">
+                    <kt-menu-action
+                      [itemIndex]="i"
+                      (clickAction)="estimateRequestEvent($event)"
+                      [menuOptions]="estimateRequestMenu(amendment)"
+                    >
+                    </kt-menu-action>
+                  </div>
+                </div>
+                <kt-reviews-list
+                  [reviewsList]="amendment.estimateRequest.review"
+                  [approvationReview]="amendment.estimateRequest.approved"
+                ></kt-reviews-list>
+              </div>
+
+              <ng-container
+                *ngIf="
+                  amendment.estimateRequestHistory &&
+                  amendment.estimateRequestHistory.length > 0
+                "
+              >
+                <kt-history-panel
+                  [history]="amendment.estimateRequestHistory"
+                ></kt-history-panel>
+              </ng-container>
+
+              <hr class="separator mt-0" *ngIf="amendment.isLatestVersion" />
+              <div class="px-4" *ngIf="amendment.f01Estimate">
+                <p
+                  class="title-user-form-secondary font-weight-bold primary-text mb-3"
+                >
+                  F01 de pago
+                </p>
+                <hr class="gray-line" />
+                <div class="row mt-4 px-3">
+                  <div class="col-11">
+                    <kt-file-details
+                      [accredited]="true"
+                      [showTags]="true"
+                      [file]="amendment.f01Estimate"
+                    ></kt-file-details>
+                  </div>
+                  <div
+                    class="col-1 d-flex justify-content-end align-items-start"
+                  >
+                    <kt-menu-action
+                      [itemIndex]="i"
+                      (clickAction)="f01EstimateEvent($event)"
+                      [menuOptions]="f01EstimateMenu"
+                    >
+                    </kt-menu-action>
+                  </div>
+                </div>
+              </div>
+
+              <ng-container
+                *ngIf="
+                  amendment.f01EstimateHistory &&
+                  amendment.f01EstimateHistory.length > 0
+                "
+              >
+                <kt-history-panel
+                  [showAllAccredited]="true"
+                  [history]="amendment.f01EstimateHistory"
+                ></kt-history-panel>
+              </ng-container>
+              <div
+                *ngIf="!amendment.f01Estimate && amendment.isLatestVersion"
+                class="px-3 pb-3"
+              >
+                <kt-upload-files
+                  [accredit]="true"
+                  [idGroup]="selectedProject.execution.payment.estimate[i].id"
+                  documentType="f01Estimate"
+                  objectInEdition="execution"
+                  [isDisable]="!hasAccesEdit"
+                  title="F01 de pago"
+                ></kt-upload-files>
+              </div>
+
+              <hr class="separator mt-0" *ngIf="amendment.f01Estimate" />
+              <div class="px-4" *ngIf="amendment.proffPayment">
+                <p
+                  class="title-user-form-secondary font-weight-bold primary-text mb-3"
+                >
+                Confirmación de pago
+                </p>
+                <hr class="gray-line" />
+                <div class="row mt-4 px-3">
+                  <div class="col-11">
+                    <kt-file-details
+                      [accredited]="true"
+                      [showTags]="true"
+                      [file]="amendment.proffPayment"
+                    ></kt-file-details>
+                  </div>
+                  <div
+                    class="col-1 d-flex justify-content-end align-items-start"
+                  >
+                    <kt-menu-action
+                      [itemIndex]="i"
+                      (clickAction)="proofEstimateEvent($event)"
+                      [menuOptions]="noObjectionMenu"
+                    >
+                    </kt-menu-action>
+                  </div>
+                </div>
+              </div>
+
+              <ng-container
+                *ngIf="
+                  amendment.proffPaymentHistory &&
+                  amendment.proffPaymentHistory.length > 0
+                "
+              >
+                <kt-history-panel
+                  [showAllAccredited]="true"
+                  [history]="amendment.proffPaymentHistory"
+                ></kt-history-panel>
+              </ng-container>
+              <div
+                *ngIf="!amendment.proffPayment && amendment.f01Estimate"
+                class="px-3 pb-3"
+              >
+                <kt-upload-files
+                  [accredit]="true"
+                  [idGroup]="selectedProject.execution.payment.estimate[i].id"
+                  documentType="cdpEstimate"
+                  objectInEdition="execution"
+                  [isDisable]="!hasAccesEdit"
+                  title="Confirmación de pago"
+                >
+                </kt-upload-files>
+              </div>
+            </div>
+          </ng-container>
+        </kt-documents-panel>
+      </div>
+    </ng-container>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+        <div class="container form-container-steps bg-white px-4 py-4">
+          <kt-upload-files
+            objectInEdition="execution"
+            documentType="estimateRequest"
+            [isDisable]="!hasAccesToUpload || isAccreditStepThree"
+            title="Pago de estimación"
+          >
+          </kt-upload-files>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

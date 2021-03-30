@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "value": "051-15-AO-02839",
+      "shortName": "Lima 15-AO-02839"
+    },
+    {
+      "value": "059-15-AO-02839",
+      "shortName": "Honduras 15-AO-02839"
+    },
+    {
+      "value": "057-15-AO-02839",
+      "shortName": "Ecuador 15-AO-02839"
+    }
+  ],
+  "status": "00000",
+  "message": "La consulta se ha re<lizado con éxito"
+}

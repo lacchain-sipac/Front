@@ -1,0 +1,9 @@
+<div class="main-container">
+  <div class="content-wrap">
+    <kt-header [secondHeaderHeight]="secondHeaderHeight" *ngIf="isVisibleHeader"></kt-header>
+    <router-outlet></router-outlet>
+    <kt-loader></kt-loader>
+    <kt-notification></kt-notification>
+  </div>
+  <kt-footer class="footer" *ngIf="isVisibleFooter"></kt-footer>
+</div>

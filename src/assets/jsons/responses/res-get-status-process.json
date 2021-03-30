@@ -1,0 +1,16 @@
+{
+  "status": "00000",
+  "data": [
+      {
+          "code": "D",
+          "name": "Disponible",
+          "description": "Estado disponible del proceso"
+      },
+      {
+          "code": "ND",
+          "name": "No disponible",
+          "description": "Estado no disponible del proceso"
+      }
+  ],
+  "message": "La consulta se realizó con éxito."
+}

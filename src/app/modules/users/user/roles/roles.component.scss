@@ -1,0 +1,45 @@
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333333;
+}
+.containerRol {
+  margin-bottom: 10px;
+  .contentRol {
+    .check {
+    }
+
+    .text {
+      .rol {
+        font-size: 14px;
+        font-weight: 500;
+        color: #333333;
+      }
+      .description {
+        font-size: 12px;
+        font-style: normal;
+        color: #959595;
+      }
+    }
+  }
+  .containerPrivilege {
+    .title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #666666;
+    }
+
+    .contentPrivilege {
+      .check {
+      }
+
+      .text {
+        .privilege {
+          font-size: 14px;
+          font-weight: 500;
+          color: #333333;
+        }
+      }
+    }
+  }
+}

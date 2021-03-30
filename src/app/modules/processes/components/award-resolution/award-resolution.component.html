@@ -1,0 +1,69 @@
+<div *ngIf="selectedProcess" class="row pt-4">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+    <div
+      *ngIf="!thereIsNoDocuments"
+      class="form-container-steps bg-white pt-4 mb-4"
+    >
+      <div class="px-4">
+        <p class="title-user-form-secondary font-weight-bold primary-text mb-3">
+          Resolución de adjudicación
+        </p>
+        <hr class="gray-line" />
+        <div class="row mt-4 px-3">
+          <div class="col-11">
+            <kt-file-details
+              [uppercase]="true"
+              [accredited]="true"
+              [showTags]="true"
+              [file]="documents[documents.length - 1]"
+            >
+            </kt-file-details>
+          </div>
+          <div class="col-1 d-flex align-items-start">
+            <kt-menu-action
+              (clickAction)="menuEvent($event)"
+              [menuOptions]="menuOptions"
+              [itemIndex]="documents.length - 1"
+            >
+            </kt-menu-action>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="historyDocuments.length > 0">
+        <kt-history-panel
+          [history]="historyDocuments.reverse()"
+        ></kt-history-panel>
+      </ng-container>
+    </div>
+
+    <div class="row" *ngIf="thereIsNoDocuments">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+        <div class="container form-container-steps bg-white px-4 py-4">
+          <kt-upload-files
+            [accredit]="true"
+            objectInEdition="process"
+            [isDisable]="!hasAccesEdit"
+            documentType="awardResolutionDocument"
+            title="Resolución de adjudicación"
+          >
+          </kt-upload-files>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-end mt-3">
+  <button
+    (click)="goBack()"
+    class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center"
+  >
+    Volver
+  </button>
+  <button
+    (click)="next()"
+    class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4"
+  >
+    {{ textButtonNext }}
+  </button>
+</div>

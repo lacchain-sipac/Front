@@ -1,0 +1,57 @@
+@import "abstracts/variables";
+
+.form-container-steps {
+  border-radius: 4px;
+  border: solid 1px #b5b5b5;
+}
+
+.title-user-form-secondary {
+  font-size: $medium-font-size;
+  color: $primary-color;
+}
+
+.add-acquisition-title {
+  color: $secondary-color;
+  font-size: $medium-font-size;
+  margin: 0px;
+  margin-left: 1em;
+}
+
+.plus-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.plus-circle-gray {
+  border: 1px solid $secondary-color;
+}
+
+.btn-action {
+  max-width: 190px;
+  max-height: 45px;
+  min-height: 45px;
+  border-radius: 22.5px;
+  border: solid 0.5px $primary-color;
+  font-size: $small-plus-font-size;
+}
+
+.btn-action-secondary {
+  color: #ffffff;
+  background-color: $primary-color;
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.btn-action-primary {
+  color: $primary-color;
+  background-color: #ffffff;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.icon-short-size {
+  width: 1.3em;
+}

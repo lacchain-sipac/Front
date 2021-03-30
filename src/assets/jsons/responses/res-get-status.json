@@ -1,0 +1,21 @@
+{
+    "status": "00000",
+    "data": [
+        {
+            "code": "P",
+            "name": "Por completar",
+            "description": "Estado con información incompleta del registro"
+        },
+        {
+            "code": "H",
+            "name": "Habilitado",
+            "description": "Estado activo del registro"
+        },
+        {
+            "code": "D",
+            "name": "Deshabilitado",
+            "description": "Estado inactivo del registro"
+        }
+    ],
+    "message": "La consulta se realizó con éxito."
+}

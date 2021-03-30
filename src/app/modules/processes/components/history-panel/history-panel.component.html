@@ -1,0 +1,20 @@
+<div class="histo-btn d-flex flex-row-reverse">
+  <button class="btn-historial d-flex align-items-center align-middle history-button" mat-raised-button
+    (click)="togglePanel()">Ver historial<mat-icon>
+      {{panelOpenState ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon></button>
+</div>
+<hr class="dashed-2 m-0 opacity" *ngIf="panelOpenState" />
+<mat-expansion-panel [expanded]="panelOpenState" [disabled]="true">
+  <ng-container *ngFor="let biddingItem of history; let i = index">
+      <hr class="dashed-2 mb-1 opacity" *ngIf="i > 0" />
+    <div class="row mt-4 px-3">
+      <div class="col-11">
+        <kt-file-details [accredited]="showAllAccredited || !!biddingItem.approved" [smallFontSize]="smallFontSize" [showTags]="true" [version]="history.length - i" [disabled]="true" [file]="biddingItem.document || biddingItem">
+        </kt-file-details>
+      </div>
+    </div>
+    <div class="row revisions-container">
+      <kt-reviews-list [disabled]="true" [reviewsList]="biddingItem.review" [approvationReview]="biddingItem.approved"></kt-reviews-list>
+    </div>
+  </ng-container>
+</mat-expansion-panel>

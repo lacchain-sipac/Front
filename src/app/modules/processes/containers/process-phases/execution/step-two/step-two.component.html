@@ -1,0 +1,70 @@
+<div class="w-100 form-container-steps bg-white p-4 mb-3">
+  <div class="row">
+    <div class="col-6 col-lg-4 mr-auto d-flex align-items-center">
+      <p class="title-user-form-secondary font-weight-bold mb-0">
+        Contratista & Supervisor
+      </p>
+    </div>
+  </div>
+
+  <form [formGroup]="contractorAndSupervisorForm"
+        *ngIf="selects$ | async; let selects;"
+        autocomplete="off"
+        id="formStepTwo"
+        class="w-100 pt-4 bg-white">
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-form-field class="w-100"
+                        appearance="outline"
+                        floatLabel="always">
+          <mat-label>Contratista (*)</mat-label>
+          <mat-select mat-select
+                      multiple
+                      formControlName="contractor"
+                      placeholder="Selecciona uno o más de un contratista">
+            <mat-option *ngFor="let user of selects.idContractor"
+                        [value]="user.id">
+              {{user.fullname + ' ' + user.surnames}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="errorForm('contractor', 'required')">
+            {{ ccExecutionStepTwo.contractor.error.required }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-6">
+        <mat-form-field class="w-100"
+                        appearance="outline"
+                        floatLabel="always">
+          <mat-label>Supervisor (*)</mat-label>
+          <mat-select mat-select
+                      multiple
+                      formControlName="supervising"
+                      placeholder="Selecciona uno o más de un supervisor">
+            <mat-option *ngFor="let user of selects.idSupervising"
+                        [value]="user.id">
+              {{user.fullname + ' ' + user.surnames}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="errorForm('supervising', 'required')">
+            {{ ccExecutionStepTwo.supervisor.error.required }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+</div>
+
+<div class="d-flex justify-content-end mt-5">
+  <button (click)="goBack()"
+          type="button"
+          class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center">
+    Volver
+  </button>
+  <button (click)="validateForm()"
+          [type]="hasAccesEdit ? 'submit' : 'button'"
+          class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4">
+    {{textButtonNext}}
+  </button>
+</div>

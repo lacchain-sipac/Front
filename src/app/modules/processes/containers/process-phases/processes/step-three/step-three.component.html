@@ -1,0 +1,102 @@
+<div class="container mb-4">
+  <div class="row bg-white rounded-top box-shadow">
+
+    <div class="col-md-12 col-sm-12">
+      <kt-toolbar name="MIEMBROS DEL COMITÉ DE EVALUACIÓN"
+                  [columns]="columns">
+        <div class="buttons d-flex align-items-center">
+          <button mat-flat-button
+                  (click)="validateHasAccesToCreateEdit()"
+                  color="primary">
+            Agregar
+          </button>
+        </div>
+      </kt-toolbar>
+    </div>
+  </div>
+  <div class="row bg-white box-shadow">
+    <div class="col-md-12 col-sm-12 p-0">
+      <table class="table-material"
+             mat-table
+             [dataSource]="dataSource"
+             matSort
+             matSortActive="id"
+             matSortDirection="desc"
+             matSortDisableClear>
+
+        <ng-container *ngFor="let column of columns">
+          <ng-container *ngIf="column.isModelProperty"
+                        [matColumnDef]="column.property">
+            <th mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header> {{ column.name }}</th>
+            <td mat-cell
+                *matCellDef="let row">
+              <span>
+                {{ getValueRow(row, column)}}
+              </span>
+            </td>
+          </ng-container>
+        </ng-container>
+
+        <!-- action edit -->
+        <ng-container matColumnDef="action-edit">
+          <th mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header></th>
+          <td mat-cell
+              class="icon-actions text-right"
+              *matCellDef="let row">
+            <button type="button"
+                    class="icon"
+                    (click)="validateHasAccesToCreateEdit(row)"
+                    mat-icon-button>
+              <mat-icon mat-list-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- action delete -->
+        <ng-container matColumnDef="action-delete">
+          <th mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header></th>
+          <td mat-cell
+              class="icon-actions text-right"
+              *matCellDef="let row">
+            <button type="button"
+                    class="icon"
+                    (click)="openModaDelete(row.user, row.id)"
+                    mat-icon-button>
+              <mat-icon mat-list-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row
+            *matHeaderRowDef="visibleColumns"></tr>
+        <tr mat-row
+            *matRowDef="let row; columns: visibleColumns"></tr>
+      </table>
+      <div class="w-100"
+           [hidden]="hasData">
+        <div class="col-12">
+          <kt-empty-data type="membersCommittee">
+          </kt-empty-data>
+        </div>
+      </div>
+      <mat-paginator [pageSizeOptions]="[10, 20]"
+                     showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-end mt-5">
+  <button (click)="goBack()"
+          class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center">
+    Volver
+  </button>
+  <button (click)="next()"
+          class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4">
+    {{textButtonNext}}
+  </button>
+</div>

@@ -1,0 +1,34 @@
+@import "../../../../styles/abstracts/variables";
+
+.toolbar-table {
+  .title-table {
+    font-size: 16px;
+    border-right: 1px solid #ccc;
+    line-height: 32px;
+    color: $secondary-color;
+    font-weight: 500;
+  }
+  .input-search {
+    input {
+      font-size: 16px;
+      line-height: 1.125;
+      border: none;
+      height: 32px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    mat-icon {
+      width: 1.2em;
+      color: $primary-color;
+      vertical-align: bottom;
+      height: 22px;
+      font-size: 22px;
+      margin-right: 10px;
+    }
+  }
+  .buttons {
+  }
+}

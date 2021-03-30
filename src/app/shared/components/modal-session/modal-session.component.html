@@ -1,0 +1,53 @@
+<div mat-dialog-title class="p-2 row d-flex header justify-content-end">
+  <div class="col-8 d-flex justify-content-center">
+    <span>Renovar Sesión</span>
+  </div>
+  <div
+    class="col-2 d-flex justify-content-end align-items-center cursor-pointer"
+  >
+    <mat-icon
+      (click)="close(false)"
+      class="close-container"
+      class="text-white close-container"
+      aria-label="close"
+    >
+      clear</mat-icon
+    >
+  </div>
+</div>
+<div
+  class="d-flex flex-column content mx-3 mt-2"
+  *ngIf="timeToExpire$ | async as timeToExpire; else loading"
+>
+  ¿Su sesión expirará en
+  {{ timeToExpire | transformMiliseconds }}
+  {{ getUnit(timeToExpire | transformMiliseconds: 'toString') }}, desea
+  prolongar su sesión?
+</div>
+
+<ng-template #loading>
+  <div class="modal-body d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>
+
+<div mat-dialog-actions class="d-flex justify-content-center mb-1">
+  <button
+    mat-stroked-button
+    color="primary"
+    [mat-dialog-close]="false"
+    class="mx-3"
+  >
+    Cancelar
+  </button>
+  <button
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="true"
+    class="mx-3"
+  >
+    Continuar
+  </button>
+</div>

@@ -1,0 +1,12 @@
+<div
+  (click)="togglePanel()"
+  class="justify-content-center cursor-pointer align-items-center company-title-container py-3 px-2 mt-3 d-flex justify-content-between flex-row"
+>
+  <p class="text-center text-uppercase company-title mb-0 ml-auto mr-auto">{{ title }}</p>
+  <mat-icon class="icon-arrow">
+    {{ panelOpenState ? "keyboard_arrow_up" : "keyboard_arrow_down" }}
+  </mat-icon>
+</div>
+<mat-expansion-panel [ngClass]="{ 'panel-documents': panelOpenState }" class="pt-3 pb-0" [expanded]="panelOpenState" [disabled]="true">
+  <ng-content></ng-content>
+</mat-expansion-panel>

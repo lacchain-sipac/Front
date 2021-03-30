@@ -1,0 +1,217 @@
+<div class="row pt-3">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+    <ng-container *ngIf="amendmentsArrayValues">
+      <div
+        *ngFor="let amendment of amendmentsArrayValues; index as i"
+        class="form-container-steps bg-white pt-4 mb-4"
+      >
+        <div class="px-4" *ngIf="amendment.amendmentRequest">
+          <p
+            class="title-user-form-secondary font-weight-bold primary-text mb-3"
+          >
+            Pedido de enmienda
+          </p>
+          <hr class="gray-line" />
+          <div class="row mt-4 px-3">
+            <div class="col-11">
+              <kt-file-details
+                [accredited]="true"
+                [showTags]="true"
+                [file]="amendment.amendmentRequest"
+              >
+              </kt-file-details>
+            </div>
+            <div class="col-1 d-flex align-items-start">
+              <kt-menu-action
+                [itemIndex]="i"
+                (clickAction)="amendmentRequestEvent($event)"
+                [menuOptions]="amendmentsRequestMenu"
+              >
+              </kt-menu-action>
+            </div>
+          </div>
+        </div>
+
+        <ng-container
+          *ngIf="
+            amendment.amendmentRequestHistory &&
+            amendment.amendmentRequestHistory.length > 0
+          "
+        >
+          <kt-history-panel
+            [showAllAccredited]="true"
+            [history]="amendment.amendmentRequestHistory"
+          ></kt-history-panel>
+        </ng-container>
+
+        <hr class="separator mt-0" *ngIf="amendment.amendmentRequest" />
+        <div class="px-4" *ngIf="amendment.amendmentResponse">
+          <p
+            class="title-user-form-secondary font-weight-bold primary-text mb-3"
+          >
+            Enmienda
+          </p>
+          <hr class="gray-line" />
+          <div class="row mt-4 px-3">
+            <div class="col-11">
+              <kt-file-details
+                [isFinalDocument]="amendment.isLatestVersion"
+                [hasApprovalFlow]="true"
+                [accredited]="!!amendment.amendmentResponse.approved"
+                [showTags]="true"
+                [file]="amendment.amendmentResponse.document"
+              ></kt-file-details>
+            </div>
+            <div class="col-1 d-flex justify-content-end align-items-start">
+              <kt-menu-action
+                [itemIndex]="i"
+                (clickAction)="amendmentEvent($event)"
+                [menuOptions]="getAmendmentsResponseMenu(amendment)"
+              >
+              </kt-menu-action>
+            </div>
+          </div>
+          <kt-reviews-list
+            [reviewsList]="amendment.amendmentResponse.review"
+            [approvationReview]="amendment.amendmentResponse.approved"
+          ></kt-reviews-list>
+        </div>
+
+        <ng-container
+          *ngIf="
+            amendment.amendmentResponseHistory &&
+            amendment.amendmentResponseHistory.length > 0
+          "
+        >
+          <kt-history-panel
+            [history]="amendment.amendmentResponseHistory"
+          ></kt-history-panel>
+        </ng-container>
+        <div *ngIf="!amendment.amendmentResponse" class="px-3 pb-3">
+          <kt-upload-files
+            [idGroup]="selectedProject.process.init.amendment[i].id"
+            documentType="amendment"
+            objectInEdition="process"
+            title="Enmienda"
+          ></kt-upload-files>
+        </div>
+
+        <hr class="separator mt-0" *ngIf="amendment.responseAccredited" />
+        <div class="px-4" *ngIf="amendment.noObjection">
+          <p
+            class="title-user-form-secondary font-weight-bold primary-text mb-3"
+          >
+            No objeción al documento de la enmienda
+          </p>
+          <hr class="gray-line" />
+          <div class="row mt-4 px-3">
+            <div class="col-11">
+              <kt-file-details
+                [accredited]="true"
+                [showTags]="true"
+                [file]="amendment.noObjection"
+              ></kt-file-details>
+            </div>
+            <div class="col-1 d-flex justify-content-end align-items-start">
+              <kt-menu-action
+                [itemIndex]="i"
+                (clickAction)="amendmentEvent($event)"
+                [menuOptions]="noObjectionMenu"
+              >
+              </kt-menu-action>
+            </div>
+          </div>
+        </div>
+
+        <ng-container
+          *ngIf="
+            amendment.noObjectionHistory &&
+            amendment.noObjectionHistory.length > 0
+          "
+        >
+          <kt-history-panel
+            [showAllAccredited]="true"
+            [history]="amendment.noObjectionHistory"
+          ></kt-history-panel>
+        </ng-container>
+        <div
+          *ngIf="!amendment.noObjection && amendment.responseAccredited"
+          class="px-3 pb-3"
+        >
+          <kt-upload-files
+            [accredit]="true"
+            [idGroup]="selectedProject.process.init.amendment[i].id"
+            documentType="amendmentNoObjection"
+            objectInEdition="process"
+            title="No objeción al documento de enmienda"
+          ></kt-upload-files>
+        </div>
+
+        <hr class="separator mt-0" *ngIf="amendment.noObjection" />
+        <div class="px-4" *ngIf="amendment.responseNoObjection">
+          <p
+            class="title-user-form-secondary font-weight-bold primary-text mb-3"
+          >
+            Respuesta a la no objeción del documento de enmienda
+          </p>
+          <hr class="gray-line" />
+          <div class="row mt-4 px-3">
+            <div class="col-11">
+              <kt-file-details
+                [accredited]="true"
+                [showTags]="true"
+                [file]="amendment.responseNoObjection"
+              ></kt-file-details>
+            </div>
+            <div class="col-1 d-flex justify-content-end align-items-start">
+              <kt-menu-action
+                [itemIndex]="i"
+                (clickAction)="amendmentEvent($event)"
+                [menuOptions]="noObjectionResponseMenu"
+              >
+              </kt-menu-action>
+            </div>
+          </div>
+        </div>
+
+        <ng-container
+          *ngIf="
+            amendment.responseNoObjectionHistory &&
+            amendment.responseNoObjectionHistory.length > 0
+          "
+        >
+          <kt-history-panel
+            [showAllAccredited]="true"
+            [history]="amendment.responseNoObjectionHistory"
+          ></kt-history-panel>
+        </ng-container>
+        <div
+          *ngIf="amendment.noObjection && !amendment.responseNoObjection"
+          class="px-3 pb-3"
+        >
+          <kt-upload-files
+            [accredit]="true"
+            [idGroup]="selectedProject.process.init.amendment[i].id"
+            documentType="amendmentNoObjectionResponse"
+            objectInEdition="process"
+            title="Respuesta a la no objeción del documento de enmienda"
+          ></kt-upload-files>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+        <div class="container form-container-steps bg-white px-4 py-4">
+          <kt-upload-files
+            [accredit]="true"
+            objectInEdition="process"
+            documentType="amendmentRequest"
+            title="Pedido de enmienda"
+          >
+          </kt-upload-files>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

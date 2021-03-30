@@ -1,0 +1,93 @@
+@import "abstracts/variables";
+@import "main.scss";
+
+.login {
+  height: 100vh;
+  .content-login {
+    width: 400px;
+    .header {
+      margin: 30px 20px 15px;
+      .logo {
+        background-image: url("/assets/vectors/logo-bid.svg");
+        background-repeat: no-repeat;
+        width: 103px;
+        height: 40px;
+      }
+    }
+    .body {
+      padding: 20px;
+      .default-login {
+        flex: 1 55%;
+        .checkRemember,
+        .forgotPassword {
+          font-size: 13px;
+        }
+        .forgotPassword span {
+          margin-top: 2px;
+          display: block;
+          color: $primary-color;
+          cursor: pointer;
+        }
+        .divider {
+          border-top: 1px solid #d9dadc;
+          display: block;
+          line-height: 1px;
+          margin: 35px 0;
+          position: relative;
+          text-align: center;
+          .divider-title {
+            background: #fff;
+            font-size: 12px;
+            letter-spacing: 1px;
+            padding: 0 20px;
+            text-transform: uppercase;
+          }
+        }
+      }
+      .qr-login {
+        flex: 1 45%;
+      }
+    }
+  }
+  .powered {
+    margin-top: 20px;
+    img {
+      width: 220px;
+    }
+  }
+}
+.btn-kaytrust {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: $kaytrust-color;
+  width: 100%;
+  height: 50px;
+  cursor: pointer;
+  span.icon {
+    background-image: url("/assets/vectors/icon-kaytrust.svg");
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+  }
+  span.text {
+    color: white;
+    margin-left: 10px;
+    font-size: 14px;
+  }
+}
+
+.bottom-logo {
+  width: 10em;
+  height: auto;
+}
+
+.version-app {
+  span {
+    color: gray;
+    font-size: 10px;
+  }
+}

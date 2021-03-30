@@ -1,0 +1,178 @@
+<form *ngIf="selects$ | async; let selects;"
+      [formGroup]="dataForm"
+      autocomplete="off"
+      id="formUser"
+      class="w-100 pt-4 bg-white">
+  <div class="row pt-2">
+
+    <div class="col-sm-12">
+      <mat-form-field class="w-100"
+                      appearance="outline"
+                      floatLabel="always">
+        <mat-label>Nombre del proceso (*)</mat-label>
+        <input matInput
+               formControlName="processName"
+               type="text"
+               matInput
+               placeholder="Ingrese el nombre del proceso">
+        <mat-error *ngIf="errorForm('processName', 'required')">
+          {{ ccRequestStep1.processName.error.required }}
+        </mat-error>
+        <mat-error *ngIf="errorForm('processName','maxlength')">
+          {{ ccRequestStep1.processName.error.maxlength }}
+        </mat-error>
+        <mat-error *ngIf="errorForm('processName','minlength')">
+          {{ ccRequestStep1.processName.error.minlength }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-12">
+      <mat-form-field class="w-100"
+                      appearance="outline"
+                      floatLabel="always">
+        <mat-label>Objeto de la contratación (*)</mat-label>
+        <mat-select mat-select
+                    formControlName="transactionType"
+                    placeholder="Selecciona la modalidad...">
+          <mat-option *ngFor="let transactionType of selects.transactionTypeData"
+                      [value]="transactionType.code">
+            {{transactionType.description}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="errorForm('transactionType', 'required')">
+          {{ ccRequestStep1.transactionType.error.required }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <ng-container formArrayName="processDetail"
+                *ngFor="let item of processDetailForms; let i = index;">
+    <div [formGroupName]="i.toString()"
+         class="w-100 form-container-steps bg-white p-4 mb-3">
+      <div class="row mb-4">
+        <div class="col-6 col-lg-4 mr-auto d-flex align-items-center">
+          <p class="title-user-form-secondary font-weight-bold mb-0">
+            Fuente de financiamiento
+            <span *ngIf="processDetailForms.length > 1"># {{ i + 1 }}</span>
+          </p>
+        </div>
+        <ng-container *ngIf="processDetailForms.length > 1">
+          <div (click)="removeForm(i)"
+               class="col-1 col-lg-2 d-flex align-items-center justify-content-end cursor-pointer">
+            <mat-icon class="text-secondary">delete</mat-icon>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field class="w-100"
+                          appearance="outline"
+                          floatLabel="always">
+            <mat-label>Fuente de financiamiento (*)</mat-label>
+            <mat-select mat-select
+                        formControlName="fundingSource"
+                        placeholder="Selecciona…">
+              <mat-option *ngFor="let fundingSourceItem of selects.fundingSourceData"
+                          [value]="fundingSourceItem.code">
+                {{fundingSourceItem.description}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="errorFormArray('fundingSource', i, 'required')">
+              {{ ccRequestStep1.fundingSource.error.required }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field class="w-100"
+                          appearance="outline"
+                          floatLabel="always">
+            <mat-label>Organismo financiero</mat-label>
+            <mat-select mat-select
+                        formControlName="contribution"
+                        placeholder="Selecciona…">
+              <mat-option *ngFor="let contributionItem of selects.contributionData"
+                          [value]="contributionItem.code">
+                {{contributionItem.description}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="errorFormArray('contribution', i, 'required')">
+              {{ ccRequestStep1.contribution.error.required }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <mat-form-field class="w-100"
+                          appearance="outline"
+                          floatLabel="always">
+            <mat-label>N° y nombre de la operación (*)</mat-label>
+            <mat-select mat-select
+                        formControlName="operationNumber"
+                        placeholder="Selecciona…"
+                        (selectionChange)="onChangeOperationNumber(i)">
+              <mat-option *ngFor="let operationNumberItem of selects.operationNumberData"
+                          [value]="operationNumberItem.code">
+                {{operationNumberItem.code + ' - ' + operationNumberItem.description}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="errorFormArray('operationNumber', i, 'required')">
+              {{ ccRequestStep1.operationNumber.error.required }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field class="w-100"
+                          appearance="outline"
+                          floatLabel="always">
+            <mat-label>Componente asociado (*)</mat-label>
+
+            <mat-select mat-select
+                        formControlName="associatedComponent"
+                        placeholder="Selecciona…">
+              <mat-option *ngFor="let associatedComponentItem of (getAssociatedComponent(i) | async)"
+                          [value]="associatedComponentItem.code">
+                {{associatedComponentItem.description}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="errorFormArray('associatedComponent', i, 'required')">
+              {{ ccRequestStep1.associatedComponent.error.required }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </div>
+  </ng-container>
+
+  <button type="button"
+          [disabled]="!hasAccesEdit"
+          (click)="addProcessDetailForm()"
+          mat-stroked-button
+          class="w-100 d-flex justify-content-center align-items-center py-2">
+    <mat-icon>add_circle_outline</mat-icon>
+    <span class="add-acquisition-title">
+      Añadir fuente de financiamiento
+    </span>
+  </button>
+
+  <div class="d-flex justify-content-end mt-5">
+    <button (click)="goBack()"
+            type="button"
+            class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center">
+      Cancelar
+    </button>
+    <button (click)="next()"
+            [type]="hasAccesEdit ? 'submit' : 'button'"
+            class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4">
+      {{textButtonNext}}
+    </button>
+  </div>
+
+</form>

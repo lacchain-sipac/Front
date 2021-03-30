@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "value": "001",
+      "shortName": "Tipo de contrato 1"
+    },
+    {
+      "value": "002",
+      "shortName": "Tipo de contrato"
+    },
+    {
+      "value": "003",
+      "shortName": "Tipo de contrato"
+    }
+  ],
+  "status": "00000",
+  "message": "La consulta se realizó con éxito."
+}

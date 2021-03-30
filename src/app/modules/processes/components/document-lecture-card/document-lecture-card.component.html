@@ -1,0 +1,38 @@
+<div class="px-4" *ngIf="validDocument">
+  <p class="mb-3 font-weight-bold title-text">
+    {{ title }} <span *ngIf="documentNumber"># {{ documentNumber }}</span>
+  </p>
+  <hr class="separator" />
+  <div class="row mt-4 mb-2 px-3">
+    <div class="col-11">
+      <kt-file-details
+        [isFinalDocument]="isFinalDocument"
+        [accredited]="accredited"
+        [showTags]="true"
+        [smallFontSize]="true"
+        [uppercase]="true"
+        [file]="mainDocument"
+      ></kt-file-details>
+    </div>
+    <div
+      class="col-1 d-flex justify-content-end align-items-start cursor-pointer"
+    >
+      <mat-icon
+        (click)="saveFile(validDocument.document || validDocument)"
+        class="text-secondary cursor-pointer"
+        >file_download</mat-icon
+      >
+    </div>
+  </div>
+  <kt-reviews-list
+    [reviewsList]="approvals"
+    [approvationReview]="approvationReview"
+  ></kt-reviews-list>
+</div>
+<ng-container *ngIf="documentHistory && documentHistory.length">
+  <kt-history-panel
+    [showAllAccredited]="showAllAccredited"
+    [smallFontSize]="true"
+    [history]="documentHistory"
+  ></kt-history-panel>
+</ng-container>

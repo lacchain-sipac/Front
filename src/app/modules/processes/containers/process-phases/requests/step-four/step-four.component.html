@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+    <div class="container form-container-steps bg-white px-4 py-4">
+      <kt-upload-files documentTitle="Documento de especificación técnica"
+                       objectInEdition="solicitude"
+                       documentType="supportDocument"
+                       [isDisable]="!hasAccesEdit"
+                       title="Documentación Técnica"></kt-upload-files>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12 col-md-12 col-lg-12 col-lg-12 mb-4">
+    <div class="container form-container-steps bg-white px-4 py-4">
+      <p class="title-user-form-secondary font-weight-bold mb-3">Historial de documentación</p>
+      <div *ngIf="thereIsNoDocuments"
+           class="d-flex justify-content-center align-items-center pb-5 pt-5">
+        <p class="no-file-text mb-0 d-flex justify-content-center align-items-center mb-3"><img class="no-file-icon"
+               src="assets/vectors/no-file.svg"
+               alt="no-file" />Aún no hay documentación</p>
+      </div>
+      <ng-container *ngIf="selectedSolicitude.document">
+        <div *ngFor="let file of selectedSolicitude.document; let i = index">
+          <hr class="gray-line">
+          <div class="row mt-4 px-3">
+            <div class="col-11">
+              <kt-file-details [uppercase]="true"
+                               [file]="file"></kt-file-details>
+            </div>
+            <div class="col-1 d-flex justify-content-end align-items-start">
+              <kt-menu-action (clickAction)="menuEvent($event)"
+                              [menuOptions]="menuOptions"
+                              [itemIndex]="i">
+              </kt-menu-action>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-end mt-3">
+  <button (click)="goBack()"
+          type="button"
+          class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center">
+    Volver
+  </button>
+  <button (click)="next()"
+          [type]="hasAccesEdit ? 'submit' : 'button'"
+          class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4">
+    Guardar y continuar
+  </button>
+</div>

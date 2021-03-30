@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "code": "C1",
+      "description": "Estructura presupuestaria 1"
+    },
+    {
+      "code": "C2",
+      "description": "Estructura presupuestaria 2"
+    },
+    {
+      "code": "C3",
+      "description": "Estructura presupuestaria 3"
+    }
+  ],
+  "status": "00000",
+  "message": "La consulta se ha realizado con éxito."
+}

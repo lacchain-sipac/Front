@@ -1,0 +1,20 @@
+{
+    "respuesta": {
+        "codigo": "200",
+        "mensaje": "Successful"
+    },
+    "maestro": [
+        {
+            "cod_detalle": "M",
+            "des_detalle": "Masculino",
+            "valor1": "",
+            "valor2": ""
+        },
+        {
+            "cod_detalle": "F",
+            "des_detalle": "Femenino",
+            "valor1": "",
+            "valor2": ""
+        }
+    ]
+}

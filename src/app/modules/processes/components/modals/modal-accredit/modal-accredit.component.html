@@ -1,0 +1,74 @@
+<form [formGroup]="accreditForm">
+  <div mat-dialog-title
+       class="p-2 row d-flex header justify-content-end">
+    <div class="col-8 d-flex justify-content-center">
+      <span class="text-white">{{ data.title }}</span>
+    </div>
+    <div class="col-2 d-flex justify-content-end align-items-center cursor-pointer">
+      <mat-icon (click)="closeModal()"
+                class="close-container"
+                class="text-white close-container"
+                aria-label="close">
+        clear</mat-icon>
+    </div>
+  </div>
+
+  <div class="row justify-content-between">
+    <div class="col align-self-center d-flex align-items-center">
+      <div class="d-flex flex-column content mx-3 mt-2">
+        {{data.description}}
+      </div>
+    </div>
+    <ng-container *ngIf="!!data.isAccreditRequest">
+      <div class="mx-3 my-3 align-items-center d-flex">
+        <div class="switchToggle">
+          <input type="checkbox"
+                 (change)="changeIsAccredit($event)"
+                 formControlName="isAccredit"
+                 id="switch">
+          <label for="switch">Toggle</label>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div mat-dialog-content>
+    <div class="row">
+      <div class="col-sm-12">
+        <mat-form-field class="w-100"
+                        appearance="outline"
+                        floatLabel="always">
+          <mat-label>Comentario
+            <span *ngIf="!!data.isAccreditRequest">(requerido cuando no se acredita el proyecto)</span>
+            <span *ngIf="!data.isAccreditRequest && this.data.textButtonExecution !== 'Observar'">(Opcional)</span>
+            <span *ngIf="!data.isAccreditRequest && this.data.textButtonExecution === 'Observar'">(requerido)</span>
+          </mat-label>
+          <input formControlName="observation"
+                 matInput
+                 type="text"
+                 matInput
+                 placeholder="Ingrese la descripción">
+          <mat-error *ngIf="errorForm('observation','required')">
+            {{ ccAccreditDialog.observation.error.required }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions
+       class="d-flex justify-content-center mb-1">
+    <button mat-stroked-button
+            color="primary"
+            [mat-dialog-close]="false"
+            class="mx-3">
+      {{ data.textButtonReject }}
+    </button>
+    <button mat-raised-button
+            color="primary"
+            (click)="saveForm()"
+            class="mx-3">
+      {{ data.textButtonExecution }}
+    </button>
+  </div>
+</form>

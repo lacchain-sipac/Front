@@ -1,0 +1,47 @@
+<div class="login d-flex flex-column justify-content-center align-items-center">
+  <div class="content-qr-kaytrust d-flex flex-column rounded shadow bg-white">
+    <div class="header d-flex flex-row justify-content-center align-items-center">
+        <div class="logo"></div>
+    </div>
+    <div class="body d-flex flex-column align-items-center p-4">
+        <div class="wrap-steps d-flex flex-row">
+            <div class="steps">
+                <div class="guide">
+                    <span>
+                        Para iniciar sesión es necesario usar KayTrust Wallet y seguir estos pasos.
+                    </span>
+                </div>
+                <ol class="list_number_qr p-0">
+                    <li>Abrir KayTrust Wallet en tu dispositivo móvil.</li>
+                    <li>Presiona el botón de la cámara en el menú inferior.</li>
+                    <li>Apunta tu dispositivo a la pantalla para capturar el código QR.</li>
+                </ol>
+            </div>
+            <div class="qr ml-3 d-flex flex-row justify-content-center align-items-center">
+                <qrcode *ngIf="urlQR" [qrdata]="urlQR" [width]="220" [errorCorrectionLevel]="'M'"></qrcode>
+                <mat-spinner *ngIf="!urlQR"></mat-spinner>
+            </div>
+        </div>
+        <div class="divider w-100">
+            <strong class="divider-title">o</strong>
+        </div>
+        <div class="row w-100">
+            <div class="col-md-12 col-sm-12">
+                <div class="btn-email" (click)="signInWithEmail()">
+                    <span class="icon"></span>
+                    <span class="text">Iniciar sesión con correo electrónico</span>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="version-app">
+    <span> <strong>Versión :</strong> {{ versionApp }}</span>
+  </div>
+
+  <div class="powered pt-4">
+    <img class="bottom-logo"
+         src="/assets/vectors/powered-one-color.svg"
+         alt="powered-one-color">
+  </div>
+</div>

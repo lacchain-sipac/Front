@@ -1,0 +1,14 @@
+<div class="d-flex flex-row py-3" *ngIf="revision">
+  <img [src]="revisionIcon" alt="user-check" class="user-check" />
+  <div class="ml-2">
+    <p class="secondary-text small-font-size dialog-bubble py-1 px-2 m-0">
+      <span class="primary-text" [ngClass]="[disabledClass]">{{ revision.user }}</span>
+      {{ revision.observation }}
+    </p>
+    <p class="secondary-text tiny-font-size mt-1 px-2 mb-0">
+      {{ reviewDescription }} el documento el
+      <span class="primary-text" [ngClass]="[disabledClass]">{{ revision.date | date: 'short' }}</span>   -   Hash:
+      <span class="primary-text" [ngClass]="[disabledClass]">{{ revision.hash }}</span>
+    </p>
+  </div>
+</div>

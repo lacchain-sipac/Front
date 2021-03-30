@@ -1,0 +1,81 @@
+<form *ngIf="selects$ | async; let selects;"
+      [formGroup]="acquisitionMethodForm"
+      autocomplete="off"
+      id="formUser"
+      class="w-100 pt-4 bg-white">
+  <div class="row pt-2">
+    <div class="col-sm-6">
+      <mat-form-field class="w-100"
+                      appearance="outline"
+                      floatLabel="always">
+        <mat-label>Método de adquisición (*)</mat-label>
+        <mat-select formControlName="acquisitionMethod"
+                    (selectionChange)="acquisitionMethodSelected($event)"
+                    mat-select
+                    placeholder="Selecciona…">
+          <mat-option *ngFor="let acquisition of selects.acquisitionMethod"
+                      [value]="acquisition.code">
+            {{ acquisition.description }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="errorForm('acquisitionMethod', 'required')">
+          {{ ccRequestStepThree.acquisitionMethod.error.required }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-6">
+      <mat-form-field class="w-100"
+                      appearance="outline"
+                      floatLabel="always">
+        <mat-label>Describa el nuevo método</mat-label>
+        <input formControlName="newMethod"
+               matInput
+               type="text"
+               placeholder="Ingrese el nombre del nuevo método">
+        <mat-error *ngIf="errorForm('newMethod', 'required')">
+          {{ ccRequestStepThree.newMethod.error.required }}
+        </mat-error>
+        <mat-error *ngIf="errorForm('newMethod','maxlength')">
+          {{ ccRequestStepThree.newMethod.error.maxlength }}
+        </mat-error>
+        <mat-error *ngIf="errorForm('newMethod','minlength')">
+          {{ ccRequestStepThree.newMethod.error.minlength }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row pt-2">
+    <div class="col-sm-6">
+      <mat-form-field class="w-100"
+                      appearance="outline"
+                      floatLabel="always">
+        <mat-label>Tipo de contrato (*)</mat-label>
+        <mat-select formControlName="contractType"
+                    mat-select
+                    placeholder="Selecciona…">
+          <mat-option *ngFor="let contract of selects.contractType"
+                      [value]="contract.code">
+            {{ contract.description }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="errorForm('contractType', 'required')">
+          {{ ccRequestStepThree.contractType.error.required }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mt-5">
+    <button (click)="goBack()"
+            type="button"
+            class="col btn btn-action btn-action-primary d-flex justify-content-center align-items-center">
+      Volver
+    </button>
+    <button (click)="next()"
+            [type]="hasAccesEdit ? 'submit' : 'button'"
+            class="col btn btn-action btn-action-secondary d-flex justify-content-center align-items-center ml-4">
+      {{textButtonNext}}
+    </button>
+  </div>
+</form>

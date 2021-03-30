@@ -1,0 +1,43 @@
+<div class="container d-flex align-items-center justify-content-center bd-primary">
+
+  <div class="card container-roles">
+
+    <div class="card-body px-sm-5">
+
+      <div class="content pt-4">
+        <form [formGroup]="formRole">
+
+          <h5 class="text-center text-muted">Seleccione un rol para continuar</h5>
+
+          <div class="list-roles overflow-auto mx-sm-4 px-3">
+
+            <div class="item-role my-3" *ngFor="let role of roles">
+              <div class="card-body">
+                <div class="form-check d-flex align-items-center">
+                  <input class="form-check-input" type="radio" name="role" [id]="role.code" value="{{role.code}}"
+                    formControlName="role">
+                  <label class="form-check-label" [for]="role.code">
+                    <div class="title-role my-1 font-weight-bold">
+                      {{role.name}}
+                    </div>
+                    <div class="description-role">
+                      {{role.description}}
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="actions text-center mt-5 d-flex justify-content-center ">
+            <button mat-raised-button color="warn" (click)="closeModal()" class="mr-2">Cancelar</button>
+            <button mat-raised-button color="primary" [disabled]="invalidForm" [mat-dialog-close]="formRole.value.role" >Guardar</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>

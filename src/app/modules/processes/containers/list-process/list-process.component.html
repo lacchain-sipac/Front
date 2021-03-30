@@ -1,0 +1,144 @@
+<div class="d-flex flex-column m-3">
+  <div class="container content-page shadow-sm">
+    <div class="row pb-4">
+      <div class="col-md-12 col-sm-12">
+        <div class="title-page">
+          {{ title }}
+        </div>
+      </div>
+    </div>
+    <div class="row bg-white rounded-top"
+         [hidden]="!hasData">
+      <div class="col-md-12 col-sm-12">
+        <kt-toolbar placeholderSearch="Buscar por nombre de proceso"
+                    optSearch="true"
+                    optFilter="true"
+                    name="Procesos"
+                    [columns]="columns"
+                    (filterChange)="onFilterChange($event)">
+          <div class="buttons d-flex align-items-center">
+            <button mat-flat-button
+                    color="primary"
+                    (click)="createProcess()">
+              Nuevo proceso
+            </button>
+          </div>
+        </kt-toolbar>
+      </div>
+    </div>
+    <div class="row bg-white list-container"
+         [hidden]="!hasData">
+      <div class="col-md-12 col-sm-12 p-0">
+        <table class="table-material"
+               mat-table
+               [dataSource]="dataSource"
+               matSort
+               (matSortChange)="sortData($event)"
+               matSortActive="lastModifiedDate"
+               matSortDirection="desc"
+               matSortDisableClear>
+          <ng-container *ngFor="let column of columns">
+            <ng-container *ngIf="column.isModelProperty"
+                          [matColumnDef]="column.property">
+              <th mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header>
+                {{ column.name }}
+              </th>
+              <td class="cell-table"
+                  mat-cell
+                  *matCellDef="let row">
+                <span>
+                  {{ getValueRow(row, column) }}
+                </span>
+              </td>
+            </ng-container>
+          </ng-container>
+
+          <!-- action view -->
+          <ng-container matColumnDef="action-request">
+            <th mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header></th>
+            <td mat-cell
+                class="icon-actions text-right"
+                *matCellDef="let row">
+              <kt-menu-action [btnWidthEm]="0.5"
+                              [itemIndex]="dataSource.filteredData.indexOf(row)"
+                              tooltipText="SOLICITUD"
+                              [isActionsToPhases]="isActionsToPhases"
+                              menuIcon="icon_request"
+                              (clickAction)="captureEvent($event)"
+                              [menuOptions]="getMenuRequest(row)">
+              </kt-menu-action>
+            </td>
+          </ng-container>
+
+          <!-- action Process -->
+          <ng-container matColumnDef="action-process">
+            <th mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header></th>
+            <td mat-cell
+                class="icon-actions text-right"
+                *matCellDef="let row">
+              <kt-menu-action [btnWidthEm]="0.8"
+                              [isActionsToPhases]="isActionsToPhases"
+                              [itemIndex]="dataSource.filteredData.indexOf(row)"
+                              tooltipText="PROCESO"
+                              [isDisabled]="isProcessBtnDisabled(row)"
+                              menuIcon="icon_process"
+                              (clickAction)="captureEvent($event)"
+                              [menuOptions]="getMenuProcess(row)">
+              </kt-menu-action>
+            </td>
+          </ng-container>
+
+          <!-- action Payments -->
+          <ng-container matColumnDef="action-payments">
+            <th mat-header-cell
+                *matHeaderCellDef
+                mat-sort-header></th>
+            <td mat-cell
+                class="icon-actions text-right"
+                *matCellDef="let row">
+              <kt-menu-action [btnWidthEm]="0.8"
+                              [isActionsToPhases]="isActionsToPhases"
+                              [itemIndex]="dataSource.filteredData.indexOf(row)"
+                              tooltipText="EJECUCIÓN"
+                              [isDisabled]="isExecutionBtnDisabled(row)"
+                              menuIcon="icon_execution"
+                              (clickAction)="captureEvent($event)"
+                              [menuOptions]="getMenuExecution(row)">
+              </kt-menu-action>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row
+              *matHeaderRowDef="visibleColumns"></tr>
+          <tr mat-row
+              *matRowDef="let row; columns: visibleColumns"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 20]"
+                       showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+    <kt-empty-data type="requests"
+                   *ngIf="!isLoadingData && !hasData">
+      <div class="buttons-empty-data">
+        <button mat-flat-button
+                color="primary"
+                (click)="createProcess()">
+          Agregar Solicitud
+        </button>
+      </div>
+    </kt-empty-data>
+    <div *ngIf="isLoadingData && !hasData"
+         class="row d-flex p-4 flex-column bg-white justify-content-center align-items-center vh-40 rounded">
+      <mat-spinner [diameter]="60"></mat-spinner>
+      <br />
+      <span>Cargando procesos</span>
+    </div>
+  </div>
+</div>

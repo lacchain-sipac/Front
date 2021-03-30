@@ -1,0 +1,336 @@
+{
+  "data": [
+    {
+      "createdBy": "string",
+      "createdDate": "2020-02-14T16:11:28.996Z",
+      "currentStatus": {
+        "code": "D",
+        "name": "Disponible"
+      },
+      "execution": {},
+      "id": "string",
+      "lastModifiedBy": "string",
+      "lastModifiedDate": "2020-02-14T16:11:28.996Z",
+      "process": {
+        "awardResolution": [
+          {
+            "accredited": {
+              "date": "2020-02-14T16:11:28.996Z",
+              "hash": "string",
+              "observation": "string",
+              "role": "string",
+              "user": "string"
+            },
+            "approved": [
+              {
+                "date": "2020-02-14T16:11:28.996Z",
+                "observation": "string",
+                "user": "string"
+              }
+            ],
+            "document": {
+              "dateCreation": "2020-02-14T16:11:28.996Z",
+              "fileName": "string",
+              "idStorage": "string",
+              "observation": "string",
+              "user": "string"
+            }
+          }
+        ],
+        "comittee": {
+          "comittee": [
+            {
+              "detailRole": "string",
+              "id": "string",
+              "role": {
+                "id": "string",
+                "name": "string"
+              },
+              "user": "string"
+            }
+          ],
+          "hash": "string"
+        },
+        "currentStep": 3,
+        "evaluationReport": [
+          {
+            "evaluation": {
+              "accredited": {
+                "date": "2020-02-14T16:11:28.996Z",
+                "hash": "string",
+                "observation": "string",
+                "role": "string",
+                "user": "string"
+              },
+              "approved": [
+                {
+                  "date": "2020-02-14T16:11:28.996Z",
+                  "observation": "string",
+                  "user": "string"
+                }
+              ],
+              "document": {
+                "dateCreation": "2020-02-14T16:11:28.996Z",
+                "fileName": "string",
+                "idStorage": "string",
+                "observation": "string",
+                "user": "string"
+              }
+            },
+            "noObjection": {
+              "dateCreation": "2020-02-14T16:11:28.996Z",
+              "fileName": "string",
+              "hash": "string",
+              "idStorage": "string",
+              "observation": "string",
+              "user": "string"
+            }
+          }
+        ],
+        "id": "string",
+        "idSolicitude": "string",
+        "init": {
+          "amendment": [
+            {
+              "noObjection": {
+                "dateCreation": "2020-02-14T16:11:28.996Z",
+                "fileName": "string",
+                "hash": "string",
+                "idStorage": "string",
+                "observation": "string",
+                "user": "string"
+              },
+              "request": {
+                "dateCreation": "2020-02-14T16:11:28.997Z",
+                "fileName": "string",
+                "idStorage": "string",
+                "observation": "string",
+                "user": "string"
+              },
+              "response": {
+                "accredited": {
+                  "date": "2020-02-14T16:11:28.997Z",
+                  "hash": "string",
+                  "observation": "string",
+                  "role": "string",
+                  "user": "string"
+                },
+                "approved": [
+                  {
+                    "date": "2020-02-14T16:11:28.997Z",
+                    "observation": "string",
+                    "user": "string"
+                  }
+                ],
+                "document": {
+                  "dateCreation": "2020-02-14T16:11:28.997Z",
+                  "fileName": "string",
+                  "idStorage": "string",
+                  "observation": "string",
+                  "user": "string"
+                }
+              }
+            }
+          ],
+          "clarify": [
+            {
+              "request": {
+                "approved": [
+                  {
+                    "date": "2020-02-14T16:11:28.997Z",
+                    "observation": "string",
+                    "user": "string"
+                  }
+                ],
+                "document": {
+                  "dateCreation": "2020-02-14T16:11:28.997Z",
+                  "fileName": "string",
+                  "idStorage": "string",
+                  "observation": "string",
+                  "user": "string"
+                }
+              },
+              "response": {
+                "accredited": {
+                  "date": "2020-02-14T16:11:28.997Z",
+                  "hash": "string",
+                  "observation": "string",
+                  "role": "string",
+                  "user": "string"
+                },
+                "approved": [
+                  {
+                    "date": "2020-02-14T16:11:28.997Z",
+                    "observation": "string",
+                    "user": "string"
+                  }
+                ],
+                "document": {
+                  "dateCreation": "2020-02-14T16:11:28.997Z",
+                  "fileName": "string",
+                  "idStorage": "string",
+                  "observation": "string",
+                  "user": "string"
+                }
+              }
+            }
+          ],
+          "preparation": {
+            "document": [
+              {
+                "bidding": {
+                  "accredited": {
+                    "date": "2020-02-14T16:11:28.997Z",
+                    "hash": "string",
+                    "observation": "string",
+                    "role": "string",
+                    "user": "string"
+                  },
+                  "approved": [
+                    {
+                      "date": "2020-02-14T16:11:28.997Z",
+                      "observation": "string",
+                      "user": "string"
+                    }
+                  ],
+                  "document": {
+                    "dateCreation": "2020-02-14T16:11:28.997Z",
+                    "fileName": "string",
+                    "idStorage": "string",
+                    "observation": "string",
+                    "user": "string"
+                  }
+                },
+                "noObjection": {
+                  "dateCreation": "2020-02-14T16:11:28.997Z",
+                  "fileName": "string",
+                  "hash": "string",
+                  "idStorage": "string",
+                  "observation": "string",
+                  "user": "string"
+                }
+              }
+            ],
+            "linkRepository": "string"
+          }
+        },
+        "loadStructure": {
+          "budgetStructure": "string",
+          "hasStructure": true,
+          "hash": "string",
+          "observation": "string"
+        },
+        "openingAct": [
+          {
+            "accredited": {
+              "date": "2020-02-14T16:11:28.997Z",
+              "hash": "string",
+              "observation": "string",
+              "role": "string",
+              "user": "string"
+            },
+            "approved": [
+              {
+                "date": "2020-02-14T16:11:28.997Z",
+                "observation": "string",
+                "user": "string"
+              }
+            ],
+            "document": {
+              "dateCreation": "2020-02-14T16:11:28.997Z",
+              "fileName": "string",
+              "idStorage": "string",
+              "observation": "string",
+              "user": "string"
+            }
+          }
+        ],
+        "signedContract": {
+          "contract": [
+            {
+              "accredited": {
+                "date": "2020-02-14T16:11:28.997Z",
+                "hash": "string",
+                "observation": "string",
+                "role": "string",
+                "user": "string"
+              },
+              "approved": [
+                {
+                  "date": "2020-02-14T16:11:28.997Z",
+                  "observation": "string",
+                  "user": "string"
+                }
+              ],
+              "document": {
+                "dateCreation": "2020-02-14T16:11:28.997Z",
+                "fileName": "string",
+                "idStorage": "string",
+                "observation": "string",
+                "user": "string"
+              }
+            }
+          ],
+          "numberPrism": "string"
+        }
+      },
+      "solicitude": {
+        "acquisitionMethod": {
+          "acquisitionMethod": "string",
+          "contractType": "string",
+          "newMethod": "string"
+        },
+        "budgetStructure": {
+          "additionalComment": "string",
+          "availabilityStructure": true,
+          "budgetStructure": "string",
+          "viable": true
+        },
+        "createdBy": "string",
+        "currentStatus": {
+          "code": "string",
+          "name": "string"
+        },
+        "currentStep": 2,
+        "dataProcess": {
+          "processDetail": [
+            {
+              "associatedComponent": "string",
+              "contribution": "string",
+              "fundingSource": "string",
+              "operationNumber": "BL-HO-2"
+            }
+          ],
+          "processName": "Programa de integración Vial Provincial",
+          "transactionType": "string"
+        },
+        "dateAdmission": "2019-12-17T12:06:15.839-05:00",
+        "document": [
+          {
+            "dateCreation": "2020-02-14T16:11:28.998Z",
+            "fileName": "string",
+            "idStorage": "string",
+            "observation": "string",
+            "user": "string"
+          }
+        ],
+        "financingLine": {
+          "description": "string",
+          "estimatedAmount": {
+            "amount": "string",
+            "code": "string"
+          },
+          "pacLine": "string",
+          "quantity": "string",
+          "unit": "string"
+        },
+        "finishSolicitude": true,
+        "id": "string",
+        "lastModifiedBy": "Owner",
+        "lastModifiedDate": "2020-01-24T10:04:15.100-02:00"
+      }
+    }
+  ],
+  "message": "string",
+  "status": "00000"
+}

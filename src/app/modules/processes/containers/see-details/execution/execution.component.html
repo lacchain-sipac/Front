@@ -1,0 +1,223 @@
+<div *ngIf="selectedProject && selectedProject.execution"
+     class="py-3">
+  <ng-container *ngIf="
+      selectedProject.execution.assignContractor && selects$ | async;
+      let selects
+    ">
+    <div class="mx-4">
+      <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 my-3">
+        Contratistas y supervisores
+      </span>
+      <ng-container *ngFor="let contractor of getContractors(selects); index as i">
+        <kt-card-items-list [title]="i === 0 ? 'Contratistas' : null"
+                            [normalTitle]="true"
+                            [items]="contractor"></kt-card-items-list>
+      </ng-container>
+      <ng-container *ngFor="let supervisor of getSupervisors(selects); index as i">
+        <kt-card-items-list [normalTitle]="true"
+                            [title]="i === 0 ? 'Supervisores' : null"
+                            [items]="supervisor"></kt-card-items-list>
+      </ng-container>
+    </div>
+    <hr class="separator-darker my-2" />
+  </ng-container>
+  <ng-container *ngIf="selectedProject.execution.payment">
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 mx-4 my-3">
+      Pagos
+    </span>
+    <ng-container *ngIf="retainersArrayValues">
+      <p class="mb-3 font-weight-bold title-text mx-4">
+        Documentos de anticipo
+      </p>
+      <div class="mx-4"
+           *ngFor="let company of retainerCompanies">
+        <kt-documents-panel [title]="company">
+          <ng-container *ngFor="let retainer of retainersArrayValues; index as i">
+            <div class="form-container-steps pt-4 mb-3 mx-4 mt-2"
+                 *ngIf="
+                retainer.preliminaryEstimateRequest.document.company === company
+              ">
+              <ng-container *ngIf="retainer.downPaymentRequest">
+                <kt-document-lecture-card [isFinalDocument]="retainer.isLatestVersion"
+                                          [documentHistory]="retainer.downPaymentRequestHistory"
+                                          [accredited]="!!retainer.downPaymentRequest.approved"
+                                          [validDocument]="retainer.downPaymentRequest"
+                                          title="Solicitud de anticipo"
+                                          [approvals]="retainer.downPaymentRequest.review"
+                                          [approvationReview]="retainer.downPaymentRequest.approved">
+                </kt-document-lecture-card>
+              </ng-container>
+              <ng-container *ngIf="retainer.f01Retainer">
+                <hr class="separator-darker mt-0" />
+                <kt-document-lecture-card [documentHistory]="retainer.f01RetainerHistory"
+                                          [accredited]="true"
+                                          [showAllAccredited]="true"
+                                          [validDocument]="retainer.f01Retainer"
+                                          title="F01 de anticipo"></kt-document-lecture-card>
+              </ng-container>
+              <ng-container *ngIf="retainer.proffPayment">
+                <hr class="separator-darker mt-0" />
+                <kt-document-lecture-card [documentHistory]="retainer.proffPaymentHistory"
+                                          [accredited]="true"
+                                          [showAllAccredited]="true"
+                                          [validDocument]="retainer.proffPayment"
+                                          title="Comprobante de pago de anticipo"></kt-document-lecture-card>
+              </ng-container>
+            </div>
+          </ng-container>
+        </kt-documents-panel>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="paymentsArrayValues">
+      <p class="mb-3 font-weight-bold title-text mx-4">
+        Documentos de Pago de estimación
+      </p>
+      <div class="mx-4"
+           *ngFor="let company of estimateCompanies">
+        <kt-documents-panel [title]="company">
+          <ng-container *ngFor="let payment of paymentsArrayValues; index as i">
+            <div class="form-container-steps pt-4 mb-3 mx-4"
+                 *ngIf="
+                payment.preliminaryEstimateRequest.document.company === company
+              ">
+              <ng-container *ngIf="payment.estimateRequest">
+                <kt-document-lecture-card [isFinalDocument]="payment.isLatestVersion"
+                                          [documentHistory]="payment.estimateRequestHistory"
+                                          [accredited]="!!payment.estimateRequest.approved"
+                                          [validDocument]="payment.estimateRequest"
+                                          title="Pago de estimación"
+                                          [approvals]="payment.estimateRequest.review"
+                                          [approvationReview]="payment.estimateRequest.approved">
+                </kt-document-lecture-card>
+              </ng-container>
+              <ng-container *ngIf="payment.f01Estimate">
+                <hr class="separator-darker mt-0" />
+                <kt-document-lecture-card [documentHistory]="payment.f01EstimateHistory"
+                                          [accredited]="true"
+                                          [showAllAccredited]="true"
+                                          [validDocument]="payment.f01Estimate"
+                                          title="F01 de pago"></kt-document-lecture-card>
+              </ng-container>
+              <ng-container *ngIf="payment.proffPayment">
+                <hr class="separator-darker mt-0" />
+                <kt-document-lecture-card [documentHistory]="payment.proffPaymentHistory"
+                                          [accredited]="true"
+                                          [showAllAccredited]="true"
+                                          [validDocument]="payment.proffPayment"
+                                          title="Comprobante de pago de estimación"></kt-document-lecture-card>
+              </ng-container>
+            </div>
+          </ng-container>
+        </kt-documents-panel>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="finalPaymentsViewer">
+      <p class="mb-3 font-weight-bold title-text mx-4">
+        Documentos de pago final
+      </p>
+      <div class="mx-4"
+           *ngFor="let company of finalPaymentCompanies">
+        <kt-documents-panel [title]="company">
+          <ng-container *ngFor="let payment of finalPaymentsViewer; index as i">
+            <div *ngIf="
+                payment.preliminaryEstimateRequest.document.company === company
+              "
+                 class="form-container-steps pt-4 mb-3 mx-4">
+              <ng-container *ngIf="payment.estimateRequest">
+                <kt-document-lecture-card [isFinalDocument]="payment.isLatestVersion"
+                                          [documentHistory]="payment.estimateRequestHistory"
+                                          [accredited]="!!payment.estimateRequest.approved"
+                                          [validDocument]="payment.estimateRequest"
+                                          title="Pago final"
+                                          [approvals]="payment.estimateRequest.review"
+                                          [approvationReview]="payment.estimateRequest.approved">
+                </kt-document-lecture-card>
+              </ng-container>
+              <ng-container *ngIf="payment.f01Estimate">
+                <hr class="separator-darker mt-0" />
+                <kt-document-lecture-card [documentHistory]="payment.f01EstimateHistory"
+                                          [accredited]="true"
+                                          [showAllAccredited]="true"
+                                          [validDocument]="payment.f01Estimate"
+                                          title="F01 de pago final"></kt-document-lecture-card>
+              </ng-container>
+              <ng-container *ngIf="payment.proffPayment">
+                <hr class="separator-darker mt-0" />
+                <kt-document-lecture-card [documentHistory]="payment.proffPaymentHistory"
+                                          [accredited]="true"
+                                          [showAllAccredited]="true"
+                                          [validDocument]="payment.proffPayment"
+                                          title="Confirmación de pago final"></kt-document-lecture-card>
+              </ng-container>
+            </div>
+          </ng-container>
+        </kt-documents-panel>
+      </div>
+    </ng-container>
+    <hr class="separator-darker my-2" />
+  </ng-container>
+  <ng-container *ngIf="contracts || modificationContract">
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 mx-4 my-3">
+      Modificación de contrato
+    </span>
+
+    <div class="form-container-steps pt-4 mb-3 mx-4 mt-2"
+         *ngIf="modificationContract">
+      <kt-document-lecture-card [isFinalDocument]="isModificationContractLatestVersion"
+                                [documentHistory]="mofificationContractHistory"
+                                [accredited]="!!modificationContract[modificationContract.length - 1].approved"
+                                [validDocument]="modificationContract[modificationContract.length - 1].document"
+                                title="Modificación de contrato - Paso 3"
+                                [approvals]="modificationContract[modificationContract.length - 1].review"
+                                [approvationReview]="modificationContract[modificationContract.length - 1].approved">
+      </kt-document-lecture-card>
+    </div>
+
+    <div class="form-container-steps pt-4 mb-3 mx-4 mt-2"
+         *ngIf="!!contracts">
+      <kt-document-lecture-card [isFinalDocument]="isContractLatestVersion"
+                                [documentHistory]="contractsHistory"
+                                [accredited]="!!contracts[contracts.length - 1].approved"
+                                [validDocument]="contracts[contracts.length - 1].document"
+                                title="Modificación de contrato - paso 4"
+                                [approvals]="contracts[contracts.length - 1].review"
+                                [approvationReview]="contracts[contracts.length - 1].approved">
+      </kt-document-lecture-card>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="selectedProject.execution.qualityGuarantee">
+    <span class="badge badge-pill badge-info contrast-bg semi-bold-text mb-3 mx-4 my-3">
+      Garantía de calidad
+    </span>
+    <div class="col-12 px-4">
+      <div class="row justify-content-between">
+        <div class="col align-self-center d-flex align-items-center text-question">
+          <span class="action_title_secondary small-plus-text">
+            ¿Terminar la Fase de Pagos del proceso
+            <span class="font-weight-bold">
+              {{ selectedProject.solicitude.dataProcess.processName }} </span>?
+          </span>
+        </div>
+        <div class="mx-3 my-3">
+          <div class="switchToggle">
+            <input [disabled]="true"
+                   [checked]="
+                selectedProject.execution.qualityGuarantee.hasQualityGuarantee
+              "
+                   type="checkbox"
+                   id="switch" />
+            <label for="switch">Toggle</label>
+          </div>
+        </div>
+      </div>
+      <div class="item-container mt-3">
+        <span class="label-item">Observación</span>
+        <p class="value-item">
+          {{ selectedProject.execution.qualityGuarantee.observation }}
+        </p>
+      </div>
+    </div>
+  </ng-container>
+</div>

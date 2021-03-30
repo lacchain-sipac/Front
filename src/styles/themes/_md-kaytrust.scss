@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@import '../base/palettes';
+
+@include mat-core();
+$kaytrust-primary: mat-palette($palette-kaytrust-primary);
+$kaytrust-accent: mat-palette($palette-kaytrust-secondary);
+$kaytrust-warn: mat-palette($mat-red);
+$kaytrust-theme: mat-light-theme($kaytrust-primary, $kaytrust-accent, $kaytrust-warn);
+@include angular-material-theme($kaytrust-theme); //@include mat-button-theme($kaytrust-theme);

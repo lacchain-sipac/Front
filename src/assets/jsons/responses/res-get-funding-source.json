@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "value": "001",
+      "shortName": "Diesel Tecnica E.I.R.L"
+    },
+    {
+      "value": "034",
+      "shortName": "LOPGRA S.A.C."
+    },
+    {
+      "value": "067",
+      "shortName": "Compañia de radiodifusión peruana"
+    }
+  ],
+  "status": "00000",
+  "message": "La consulta se realizó con éxito."
+}
